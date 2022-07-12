@@ -131,6 +131,8 @@ dist
 
 # Vercel Serverless
 .vercel
+# BUG fix Vercel deploy with package-lock
+package-lock.json
 
 # Envinroment values
 .env*
