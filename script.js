@@ -33,10 +33,10 @@ async function init() {
         street,
         images,
         date
-    }) => {
+    }, i) => {
         return {
             type: 'Feature',
-            id: name,
+            id: name + i,
             geometry: {
                 type: 'Point',
                 coordinates: coords.split(', ')
