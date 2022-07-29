@@ -23,7 +23,7 @@ async function init() {
     const response = await fetch(`/api/map`);
     const objects = await response.json();
 
-    console.log(objects);
+    console.debug(objects);
 
     const mapItems = objects.map(({
         name,
