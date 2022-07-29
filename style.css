@@ -1,0 +1,8 @@
+.map {
+    width: 100vw;
+    height: 100vh;
+}
+
+ymaps[class*="ground-pane"] {
+    filter: invert(100%) sepia(50%) saturate(200%) hue-rotate(180deg) brightness(110%) contrast(90%);
+}
