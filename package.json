@@ -3,6 +3,7 @@
   "description": "Карта объектов Дизайн-кода Екатеринбурга",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "node-fetch": "^3.2.6"
   }

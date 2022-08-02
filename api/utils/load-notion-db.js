@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import extractNotionValue from './extract-notion-value.mjs';
+import extractNotionValue from './extract-notion-value.js';
 
 async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-02-22') {
     const response = await fetch(`https://api.notion.com/v1/databases/${notionDB}/query`, {

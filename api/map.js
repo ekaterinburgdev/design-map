@@ -1,4 +1,4 @@
-import loadNotionDB from './utils/load-notion-db.mjs';
+import loadNotionDB from './utils/load-notion-db.js';
 
 const { NOTION_TOKEN, NOTION_DATABASE } = process.env;
 
