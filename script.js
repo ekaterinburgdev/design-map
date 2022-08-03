@@ -1,4 +1,15 @@
-ymaps.ready(init);
+const MAP_OBJECTS_TYPES = {
+	'Логотип': 'orange',
+	'Навигационные стелы': 'yellow',
+	'Таблички ОКН': 'olive',
+	'Таблички ЧО': 'gray',
+	'Обыные адресные таблички': 'violet',
+	'Фризы остановок': 'pink',
+	'Светофор': 'lightBlue',
+	'Исторические адресные таблички': 'black'
+}
+
+const map = ymaps.ready(init);
 
 async function init() {
 	const myMap = new ymaps.Map('map', {
@@ -13,23 +24,10 @@ async function init() {
 		clusterDisableClickZoom: true
 	});
 
-	objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-	objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
 	myMap.geoObjects.add(objectManager);
 
 	const response = await fetch(`/api/map`);
 	const objects = await response.json();
-
-	const types = {
-		'Логотип': 'orange',
-		'Навигационные стелы': 'yellow',
-		'Таблички ОКН': 'olive',
-		'Таблички ЧО': 'gray',
-		'Обыные адресные таблички': 'violet',
-		'Фризы остановок': 'pink',
-		'Светофор': 'lightBlue',
-		'Исторические адресные таблички': 'black'
-	}
 
 	const mapItems = objects.map(({
 		name,
@@ -42,13 +40,13 @@ async function init() {
 	}, i) => {
 		return {
 			type: 'Feature',
-			id: name + i,
+			id: `${type}_${name}_${i}`,
 			geometry: {
 				type: 'Point',
 				coordinates: coords.split(', ')
 			},
 			options: {
-				preset: `islands#${types[type]}CircleDotIcon`
+				preset: getOptionsPresetName(type)
 			},
 			properties: {
 				balloonContent: `
@@ -74,4 +72,51 @@ async function init() {
 		}
 	})
 	objectManager.add(mapItems);
+	initMapFilter(objectManager);
+}
+
+function initMapFilter(objectManager) {
+	const filter = document.createElement('div');
+	filter.classList.add('filter');
+
+	let toggleMapObject = (type) => {
+		let filteredValues =
+			[...document.querySelectorAll('.checkbox__input')]
+				.filter(input => input.checked)
+				.map(input => input.name)
+				
+		objectManager.setFilter(object => filteredValues.includes(object.options.preset))
+	}
+
+	let renderFilterItem = (type) => {
+		const label = document.createElement('label');
+		label.classList.add('checkbox');
+
+		const input = document.createElement('input');
+		input.classList.add('checkbox__input');
+		input.type = 'checkbox';
+		input.name = getOptionsPresetName(type);
+		input.checked = true;
+		input.addEventListener('input', () => toggleMapObject(type))
+
+		const labelText = document.createElement('span');
+		labelText.classList.add('checkbox__caption');
+		labelText.innerHTML = type;
+
+		label.appendChild(input);
+		label.appendChild(labelText);
+
+		filter.appendChild(label);
+		return label;
+	}
+
+	for (const type of Object.keys(MAP_OBJECTS_TYPES)) {
+		filter.appendChild(renderFilterItem(type));
+	}
+
+	document.body.appendChild(filter);
+}
+
+function getOptionsPresetName(type) {
+	return `islands#${MAP_OBJECTS_TYPES[type]}CircleDotIcon`
 }
