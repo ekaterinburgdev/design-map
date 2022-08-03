@@ -76,10 +76,15 @@ async function init() {
 }
 
 function initMapFilter(objectManager) {
+	const objectsList = objectManager.objects.getAll();
 	const filter = document.createElement('div');
 	filter.classList.add('filter');
 
-	let toggleMapObject = (type) => {
+	let getNumberOfObjectsByType = (type) => {
+		return objectsList.filter(object => object.id.includes(type)).length
+	}
+
+	let filterMapObjects = () => {
 		let filteredValues =
 			[...document.querySelectorAll('.checkbox__input')]
 				.filter(input => input.checked)
@@ -88,7 +93,7 @@ function initMapFilter(objectManager) {
 		objectManager.setFilter(object => filteredValues.includes(object.options.preset))
 	}
 
-	let renderFilterItem = (type) => {
+	let renderFilterItem = (type, numberOfType) => {
 		const label = document.createElement('label');
 		label.classList.add('checkbox');
 
@@ -97,11 +102,11 @@ function initMapFilter(objectManager) {
 		input.type = 'checkbox';
 		input.name = getOptionsPresetName(type);
 		input.checked = true;
-		input.addEventListener('input', () => toggleMapObject(type))
+		input.addEventListener('input', () => filterMapObjects(type))
 
 		const labelText = document.createElement('span');
 		labelText.classList.add('checkbox__caption');
-		labelText.innerHTML = type;
+		labelText.innerHTML = `${type} (${numberOfType})`;
 
 		label.appendChild(input);
 		label.appendChild(labelText);
@@ -111,7 +116,12 @@ function initMapFilter(objectManager) {
 	}
 
 	for (const type of Object.keys(MAP_OBJECTS_TYPES)) {
-		filter.appendChild(renderFilterItem(type));
+		const numberOfObjects = getNumberOfObjectsByType(type);
+
+		if (numberOfObjects) {
+			const filterItem = renderFilterItem(type, numberOfObjects);
+			filter.appendChild(filterItem);
+		}
 	}
 
 	document.body.appendChild(filter);
