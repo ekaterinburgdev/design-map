@@ -16,9 +16,6 @@ body {
 
 .balloon {
     font-family: system-ui, sans-serif;
-    width: 100%;
-    min-width: 270px;
-    max-width: 370px;
     padding: 12px 0 12px 4px;
 }
 
@@ -41,6 +38,7 @@ body {
     font-size: 13px;
     line-height: 1.2;
     margin-bottom: 0;
+    font-style: normal;
 }
 
 .balloon__description {
@@ -61,17 +59,23 @@ body {
 .filter {
     font-family: system-ui, sans-serif;
     position: fixed;
-    top: 2vw;
-    right: 2vw;
+    bottom: 50px;
+    left: 10px;
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 12px;
+    background: rgba(255,255,255,.9);
+    padding: 20px;
     border-radius: 5px;
-    background: white;
-    color: #464646;
+    color: #123;
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
-    max-width: 200px;
+    width: 100%;
+    max-width: 270px;
+}
+
+@media screen and (max-width: 768px) {
+    .filter {
+        display: none;
+    }
 }
 
 .checkbox {
@@ -81,7 +85,7 @@ body {
     font-family: inherit;
     font-weight: 400;
     line-height: 1.1;
-    margin-bottom: 1em;
+    padding: .5em 0;
 }
 
 .checkbox:last-child {
@@ -92,10 +96,45 @@ body {
     margin: .1em .4em 0 0;
 }
 
+.checkbox__caption-counter {
+    font-weight: 600;
+    margin-left: .5em;
+}
+
 ymaps[class*="ground-pane"] {
     filter: invert(100%) sepia(50%) saturate(200%) hue-rotate(180deg) brightness(110%) contrast(90%);
 }
 
 ymaps[class*="balloon__layout"] {
     border-radius: 4px !important;
+}
+
+.balloon__image {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.balloon img {
+    width: 90%;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 4px;
+    background: black;
+    transition: .15s ease opacity;
+}
+
+.balloon img:hover {
+    opacity: .7;
+}
+
+.balloon img:active {
+    opacity: .8;
+}
+
+[class*="-balloon "] {
+    filter: invert(1);
+    box-shadow: none;
+}
+
+[class*="-balloon "] img {
+    filter: invert(1);
 }
