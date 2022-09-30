@@ -1,20 +1,28 @@
-# Карта Дизайн-кода Екатеринбурга
+# Ekaterinburg Design Map
 
-Карта объектов внедренных Дизайн-кодом Екатеринбурга
+Map of [ekaterinburg.design](https://ekaterinburg.design) objects
 
-## Технологии
-- API Яндекс.Карт
-- Vercel Serverless
-- База отметок в Notion
+**[map.ekaterinburg.design](https://map.ekaterinburg.design)**
 
-## Запуск
+## Tools
+- [Yandex Map API](https://yandex.com/dev/maps/jsapi/)
+- [Vercel Serverless](https://vercel.com/)
+- [Notion API](https://developers.notion.com/) for Placemarks database
 
-1. Создать файл с переменными среды `.env`
+## Running
+
+1. Create a file with environment variables `.env.local`
 ```
 NOTION_TOKEN=
 NOTION_DATABASE=
 ```
 
-2. Установить зависимости `npm i`
+2. Install dependencies
+```
+npm i
+```
 
-3. Запустить `npx vercel dev`
+3. Run
+```
+npx vercel dev
+```
