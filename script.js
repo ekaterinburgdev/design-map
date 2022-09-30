@@ -11,7 +11,9 @@ const MAP_OBJECTS_TYPES = {
 	'Памятные таблички': 'black',
 	'Транспорт': 'yellow',
 	'Настенные таблички': 'green'
-}
+};
+
+ymaps.ready(init);
 
 const loader = document.querySelector('[data-loader]');
 
@@ -52,6 +54,8 @@ async function init() {
 				coordinates: coords.split(', ')
 			},
 			options: {
+				balloonMinWidth: 300,
+				balloonMinHeight: 600,
 				preset: getOptionsPresetName(type)
 			},
 			properties: {
@@ -66,7 +70,12 @@ async function init() {
 						`<p class="balloon__description">${description}</p>` : ''}
 						${date ?
 						`<p class="balloon__date">${new Date(date).toLocaleDateString('ru')}</p>` : ''}
-						${images?.map(x => `<br><img src="${x}" alt="" style="max-width: 100%" />`).join('<br />')}
+						${images?.map(x => `<br>
+							<a href="${x}" target="_blank">
+								<img src="${x}" alt="" />
+							</a>`).join('<br />')}
+						<br />
+						<br />
 					</div>
 					`,
 				hintContent: `
@@ -95,7 +104,7 @@ function initMapFilter(objectManager) {
 			[...document.querySelectorAll('.checkbox__input')]
 				.filter(input => input.checked)
 				.map(input => input.name)
-				
+
 		objectManager.setFilter(object => filteredValues.includes(object.options.preset))
 	}
 
