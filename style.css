@@ -4,6 +4,8 @@ body {
     overflow: hidden;
     overflow: clip;
     background: black;
+    margin: 0;
+    padding: 0;
 }
 
 .map {
