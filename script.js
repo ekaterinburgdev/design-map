@@ -110,10 +110,15 @@ function initMapFilter(objectManager) {
 
 		const labelText = document.createElement('span');
 		labelText.classList.add('checkbox__caption');
-		labelText.innerHTML = `${type} (${numberOfType})`;
+		labelText.innerText = type;
+
+		const labelTextCounter = document.createElement('span');
+		labelTextCounter.classList.add('checkbox__caption-counter');
+		labelTextCounter.innerText = numberOfType;
 
 		label.appendChild(input);
 		label.appendChild(labelText);
+		labelText.appendChild(labelTextCounter);
 
 		filter.appendChild(label);
 		return label;
