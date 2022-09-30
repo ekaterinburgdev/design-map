@@ -13,7 +13,7 @@ const MAP_OBJECTS_TYPES = {
 	'Настенные таблички': 'green'
 }
 
-const map = ymaps.ready(init);
+const loader = document.querySelector('[data-loader]');
 
 async function init() {
 	const myMap = new ymaps.Map('map', {
@@ -32,6 +32,8 @@ async function init() {
 
 	const response = await fetch(`/api/map`);
 	const objects = await response.json();
+
+	loader.remove();
 
 	const mapItems = objects.map(({
 		name,
