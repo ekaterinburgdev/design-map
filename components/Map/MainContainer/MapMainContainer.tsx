@@ -9,8 +9,6 @@ import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 
-import { MapLocation } from 'components/Map/Location/MapLocation';
-
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -40,8 +38,6 @@ function MapMainContainer() {
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
 
             <ScaleControl position="topright" />
-
-            <MapLocation />
         </MapContainer>
     );
 }
