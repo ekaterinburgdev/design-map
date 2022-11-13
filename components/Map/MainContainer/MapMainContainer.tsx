@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
@@ -32,12 +32,11 @@ function MapMainContainer() {
             center={position}
             scrollWheelZoom
             attributionControl={null}
+            zoomControl={false}
             zoom={16}
             className={cn(styles.Map)}
         >
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
-
-            <ScaleControl position="topright" />
         </MapContainer>
     );
 }

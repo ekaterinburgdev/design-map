@@ -4,22 +4,23 @@
     left: 10px;
     display: flex;
     flex-direction: column;
-    background: black;
+    background-color: black;
     padding: 20px;
     border-radius: 5px;
-    color: #123;
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
     width: 100%;
     max-width: 270px;
-    color: white;
     z-index: 999;
+    max-height: 80vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .filter__arrow {
     opacity: 0.5;
     transition: all .3s;
     align-self: flex-end;
-    padding-bottom: .3em;
+    margin-bottom: .3em;
     display: none;
 }
 
@@ -27,66 +28,35 @@
     transform: rotate(180deg);
 }
 
-
 .filter__wrapper {
     margin-top: 1em;
     border-top: 1px solid rgba(255,255,255,.3);
     padding-top: .5em;
 }
 
-.filter__name {
+.filter__control {
     font-size: 1.5em;
     font-weight: 500;
     line-height: 1;
     display: flex;
 }
 
-.filter__name-counter {
+.filter__header {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+.filter__counter {
     padding-top: .3em;
     opacity: 0.5;
 }
 
-.checkbox {
-    display: flex;
-    align-items: flex-start;
-    font-size: .9em;
-    font-family: inherit;
-    font-weight: 400;
-    line-height: 1.1;
-    padding: .5em 0;
+.filter__list {
+    overflow: auto;
+    transition: all .3s ease;
 }
-
-.checkbox__caption-label {
-    transition: color .3s;
-
-}
-
-.checkbox:hover .checkbox__caption-label{
-    color: white ;
-    cursor: pointer;
-}
-
-.checkbox:last-child {
-    margin-bottom: 0;
-}
-
-.checkbox__input {
-    margin: .1em .4em 0 0;
-    flex-shrink: 0;
-}
-
-.checkbox__caption {
-    margin-top: .3em;
-    user-select: none;
-}
-
-.checkbox__caption-counter {
-    font-weight: 600;
-    margin-left: .5em;
-    opacity: 0.5;
-}
-
-
 
 
 @media screen and (max-width: 768px) {
@@ -94,25 +64,58 @@
         top: 5px;
         left: 5px;
         padding: 12px;
-        max-height: 100vh;
-        overflow: scroll;
     }
-
+    
     .filter__arrow {
         display: block;
     }
 
     .filter__list {
-        height: 0px;
-        display: block;
-        /* visibility: hidden; */
-        overflow: hidden;
-        transition: all .3s ease;
+        max-height: 0px;
     }
 
     .filter__list_open {
-        height: 100vw;
-        /* visibility: visible; */
-        overflow: auto;
+        max-height: 100vh;
     }
+}
+
+
+.filteritem {
+    display: flex;
+    align-items: flex-start;
+    font-size: .9em;
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1.1;
+    padding: .5em 0;
+    cursor: pointer;
+}
+
+
+.filteritem:last-child {
+    margin-bottom: 0;
+}
+
+.filteritem__input {
+    margin: .1em .4em 0 0;
+    flex-shrink: 0;
+}
+
+.filteritem__caption {
+    margin-top: .3em;
+    user-select: none;
+}
+
+.filteritem__caption-counter {
+    font-weight: 600;
+    margin-left: .5em;
+    opacity: 0.5;
+}
+
+.filteritem__caption-label {
+    transition: color .3s;
+}
+
+.filteritem:hover .filteritem__caption-label {
+    color: white;
 }
