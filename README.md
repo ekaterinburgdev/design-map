@@ -1,28 +1,28 @@
-# Ekaterinburg Design Map
+# Ekaterinburg Map
 
-Map of [ekaterinburg.design](https://ekaterinburg.design) objects
+Map for Ekaterinburg urbanists
 
-**[map.ekaterinburg.design](https://map.ekaterinburg.design)**
+**[map.ekaterinburg.dev](https://map.ekaterinburg.dev)**
 
 ## Tools
-- [Yandex Map API](https://yandex.com/dev/maps/jsapi/)
+
+- [Leaflet](https://leafletjs.com/)
+- [React Leaflet](https://react-leaflet.js.org/)
+- [Next.js](https://nextjs.org/)
 - [Vercel Serverless](https://vercel.com/)
-- [Notion API](https://developers.notion.com/) for Placemarks database
 
-## Running
+## Development
 
-1. Create a file with environment variables `.env.local`
-```
-NOTION_TOKEN=
-NOTION_DATABASE=
-```
+1. Install [Node.js](https://nodejs.org/en/download/) and [pnpm](https://www.npmjs.com/package/pnpm#user-content-usage)
 
 2. Install dependencies
+
 ```
-npm i
+pnpm i
 ```
 
-3. Run
+3. Run local server
+
 ```
-npx vercel dev
+pnpm run dev
 ```

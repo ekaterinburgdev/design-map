@@ -1,5 +1,5 @@
-name: Deploy Vercel
-on: [ push ]
+name: Vercel Deploy
+on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -7,15 +7,15 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: |
-              branch_name=${GITHUB_REF#refs/heads/}
-              branch_formatted=${branch_name//\//-}
-              echo $branch_name
-              echo $branch_formatted
-              echo ::set-output name=branch::$branch_formatted
+          branch_name=${GITHUB_REF#refs/heads/}
+          branch_formatted=${branch_name//\//-}
+          echo $branch_name
+          echo $branch_formatted
+          echo ::set-output name=branch::$branch_formatted
       - name: Checkout Code
         uses: actions/checkout@v2
-      
-      - name: Deploy to Staging 
+
+      - name: Deploy to Staging
         id: deploy-vercel-staging
         uses: amondnet/vercel-action@v20
         if: github.ref != 'refs/heads/main'
@@ -30,7 +30,7 @@ jobs:
               secrets.VERCEL_DOMAIN,
               steps.extract_branch.outputs.branch)
             }}
-      - name: Deploy to Production 
+      - name: Deploy to Production
         id: deploy-vercel-production
         uses: amondnet/vercel-action@v20
         if: github.ref == 'refs/heads/main'
@@ -38,4 +38,4 @@ jobs:
           vercel-token: ${{secrets.VERCEL_TOKEN}}
           vercel-org-id: ${{secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
-          vercel-args: '--prod'
+          vercel-args: "--prod"
