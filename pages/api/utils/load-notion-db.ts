@@ -9,6 +9,7 @@ async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28')
         'Content-Type': 'application/json',
     };
 
+    // TODO Add Notion Type
     let results : any[] = [];
 
     let response = await fetch(`https://api.notion.com/v1/databases/${notionDB}/query`, {
@@ -16,6 +17,7 @@ async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28')
         headers: requestHeaders,
     });
 
+    // TODO Add Notion Type
     let data : any = await response.json();
     results = data.results || [];
 
@@ -36,6 +38,7 @@ async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28')
         .map(({ properties }) => properties)
         .map((property) => Object.fromEntries(
             Object.entries(property)
+                // TODO Add Notion Type
                 .map(([key, value] : [any, any]) => [key, extractNotionValue(value, value.type)]),
         ));
 }
