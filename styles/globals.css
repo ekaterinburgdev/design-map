@@ -1,4 +1,10 @@
 @import './font';
+@import './checkbox.css';
+@import './leaflet.css';
+
+* {
+    box-sizing: border-box;
+}
 
 html,
 body {
@@ -6,20 +12,38 @@ body {
     margin: 0;
     font-family: 'Iset Sans', sans-serif;
     background: black;
+    color: white;
 }
 
-a {
-    color: inherit;
-}
-
-* {
-    box-sizing: border-box;
-}
 
 body {
     padding: 0;
     margin: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: 'kern';
+    -moz-font-feature-settings: 'kern=1';
+    -moz-font-feature-settings: 'kern';
+    -ms-font-feature-settings: 'kern' 1;
+    font-feature-settings: 'kern'; 
+    font-size: 1em;
+	line-height: 1.4;
+    font-weight: 400;
 }
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 
 @media (prefers-color-scheme: dark) {
     html {
@@ -32,11 +56,3 @@ body {
     }
 }
 
-/* TODO Tile server with black Open Street Map */
-.leaflet-tile-pane {
-    filter: invert(1) sepia(1) saturate(.2) hue-rotate(270deg) brightness(.7) contrast(1.1);
-}
-
-.leaflet-container {
-    background: none !important;
-}

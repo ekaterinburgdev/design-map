@@ -1,6 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import { Map } from 'components/Map';
+import { Filter } from 'components/Filter/Filter';
+import { Footer } from 'components/Footer/Footer';
 
 export default function Home() {
     return (
@@ -11,6 +13,10 @@ export default function Home() {
             </Head>
 
             <Map />
+
+            <Filter />
+
+            <Footer />
         </>
     );
 }
