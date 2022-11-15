@@ -1,0 +1,42 @@
+.popup  {
+    background-color: #000;
+    overflow: auto;
+    width: 300px;
+    max-height: 80vh;
+    border-radius: 5px;
+    font-family: 'Iset Sans', sans-serif;
+}
+
+.popup__title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.popup__description {
+    font-size: 14px;
+}
+
+.popup__address {
+    margin-top: 12px;
+}
+
+.popup__type {
+    margin-top: 4px;
+}
+
+.popup__date {
+    opacity: 0.5;
+    margin-top: 4px;
+}
+
+.popup__images {
+    margin-top: 12px;
+}
+
+.popup__image {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    min-height: 100px;
+    background-color: gray;
+}

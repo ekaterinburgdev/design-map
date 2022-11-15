@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import { Map } from 'components/Map';
-import { Filter } from 'components/Filter/Filter';
 import { Footer } from 'components/Footer/Footer';
+import { MapContextProvider } from 'components/Map/MapProvider';
 
 export default function Home() {
     return (
@@ -12,9 +12,9 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Map />
-
-            <Filter />
+            <MapContextProvider>
+                <Map />
+            </MapContextProvider>
 
             <Footer />
         </>

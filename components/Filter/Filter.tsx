@@ -1,93 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
+import { groupBy } from 'lodash';
+
+import { MARK_TYPE_COLOR } from 'common/constants/colors';
+import { MapItem } from 'common/types/map-item';
+import { MapContext } from 'components/Map/MapProvider';
+
 import styles from './Filter.module.css';
+import { FilterItem } from './FilterItem';
 
 export function Filter() {
     const [isOpen, setOpen] = useState(false);
+    const { placemarks, allMarksTypes, selectedMarksTypes } = useContext(MapContext);
+
+    const itemsByType = useMemo(
+        () => groupBy<MapItem>(placemarks, (mark) => mark.type),
+        [placemarks],
+    );
+
+    const filters = useMemo(
+        () => allMarksTypes.map((type) => ({
+            name: type,
+            count: itemsByType[type].length,
+            checked: selectedMarksTypes.includes(type),
+            color: MARK_TYPE_COLOR[type],
+        })),
+        [allMarksTypes, selectedMarksTypes, itemsByType],
+    );
+
+    const count = useMemo(() => filters.reduce((all, item) => all + item.count, 0), [filters]);
 
     const toggle = () => setOpen(!isOpen);
+
     const onKeyUp = (e) => {
         if (e.key === 'Enter') {
             toggle();
         }
     };
-
-    const items = [
-        {
-            name: 'Логотипы и айдентика',
-            checked: true,
-            count: 2,
-            color: '#E63223',
-        },
-        {
-            name: 'Навигационные стелы',
-            checked: true,
-            count: 12,
-            color: '#E63223',
-        },
-        {
-            name: 'Таблички ОКН',
-            checked: true,
-            count: 65,
-            color: '#FFd400',
-        },
-        {
-            name: 'Таблички ЧО',
-            checked: true,
-            count: 6,
-            color: '#FF640A',
-        },
-        {
-            name: 'Обычные адресные таблички',
-            checked: true,
-            count: 5,
-            color: '#FF640A',
-        },
-        {
-            name: 'Фризы остановок',
-            checked: true,
-            count: 8,
-            color: '#FFd400',
-        },
-        {
-            name: 'Светофор',
-            checked: true,
-            count: 2,
-            color: '#E63223',
-        },
-        {
-            name: 'Исторические адресные таблички',
-            checked: true,
-            count: 5,
-            color: '#E63223',
-        },
-        {
-            name: 'Уличная мебель',
-            checked: true,
-            count: 1,
-            color: '#00b400',
-        },
-        {
-            name: 'Памятные таблички',
-            checked: true,
-            count: 1,
-            color: '#00b4ff',
-        },
-        {
-            name: 'Транспорт',
-            checked: true,
-            count: 1,
-            color: '#00b4ff',
-        },
-        {
-            name: 'Настенные таблички',
-            checked: true,
-            count: 21,
-            color: '#00b400',
-        },
-    ];
-
-    const count = items.reduce((all, item) => all + item.count, 0);
 
     return (
         <div className={styles.filter}>
@@ -119,26 +68,8 @@ export function Filter() {
                 })}
             >
                 <div className={styles.filter__wrapper}>
-                    {items.map((item) => (
-                        <label className={styles.filteritem} key={item.name} htmlFor={item.name}>
-                            <input
-                                className={styles.filteritem__input}
-                                type="checkbox"
-                                defaultChecked={item.checked}
-                                id={item.name}
-                            />
-                            <span
-                                className={styles.filteritem__caption}
-                                style={{ color: item.color }}
-                            >
-                                <span className={styles['filteritem__caption-label']}>
-                                    {item.name}
-                                </span>
-                                <span className={styles['filteritem__caption-counter']}>
-                                    {item.count}
-                                </span>
-                            </span>
-                        </label>
+                    {filters.map((item) => (
+                        <FilterItem key={item.name} {...item} />
                     ))}
                 </div>
             </div>
