@@ -110,6 +110,7 @@ export function Filter() {
                         [styles.filter__arrow_open]: isOpen,
                     })}
                     src="/arrow.svg"
+                    alt=""
                 />
             </div>
             <div
@@ -119,11 +120,12 @@ export function Filter() {
             >
                 <div className={styles.filter__wrapper}>
                     {items.map((item) => (
-                        <label className={styles.filteritem} key={item.name}>
+                        <label className={styles.filteritem} key={item.name} htmlFor={item.name}>
                             <input
                                 className={styles.filteritem__input}
                                 type="checkbox"
                                 defaultChecked={item.checked}
+                                id={item.name}
                             />
                             <span
                                 className={styles.filteritem__caption}

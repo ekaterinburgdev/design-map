@@ -24,7 +24,7 @@ function MapMainContainer() {
                 iconUrl: iconUrl.src,
                 shadowUrl: shadowUrl.src,
             });
-        })();
+        }());
     }, []);
 
     return (
