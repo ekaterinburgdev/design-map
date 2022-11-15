@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import classNames from 'classnames/bind';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
@@ -8,6 +8,7 @@ import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
+import { MapItem } from 'common/types/map-item';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -17,6 +18,8 @@ const cn = classNames.bind(styles);
 function MapMainContainer() {
     const position: [number, number] = COORDS_EKATERINBURG;
 
+    const [placemarks, setPlacemarks] = useState([]);
+
     useEffect(() => {
         (async function init() {
             L.Icon.Default.mergeOptions({
@@ -24,6 +27,10 @@ function MapMainContainer() {
                 iconUrl: iconUrl.src,
                 shadowUrl: shadowUrl.src,
             });
+
+            const response = await fetch('/api/map');
+            const placemarksData = await response.json();
+            setPlacemarks(placemarksData);
         }());
     }, []);
 
@@ -37,6 +44,7 @@ function MapMainContainer() {
             className={cn(styles.Map)}
         >
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
+            {placemarks.map((placemark: MapItem) => <Marker position={placemark.coords} />)}
         </MapContainer>
     );
 }
