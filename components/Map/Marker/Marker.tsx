@@ -14,9 +14,9 @@ interface Props {
 export function Marker({ placemark }: Props) {
     const icon = new L.DivIcon({
         popupAnchor: [0, -5],
-        iconSize: [30, 30],
+        iconSize: [40, 40],
         html: `<img
-            src="${marker.src}"
+            src="${placemark?.preview?.s?.src ? placemark.preview.s.src : marker.src}"
             class="${styles.marker}"
             style="
                 border-color:${MARK_TYPE_COLOR[placemark.type]};

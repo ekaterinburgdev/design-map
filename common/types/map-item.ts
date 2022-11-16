@@ -15,12 +15,25 @@ export enum MapItemType {
     'Настенные таблички',
 }
 
+export type MapItemImageSize = {
+    width: number;
+    height: number;
+    src: string;
+};
+
+export type MapItemImage = {
+    id: string;
+    m: MapItemImageSize;
+    s: MapItemImageSize;
+};
+
 export type MapItem = {
     name: string;
     type: MapItemType;
     coords: LatLngExpression;
     street: string;
-    images: string[];
     date?: number;
     description: string;
+    images: MapItemImage[];
+    preview: MapItemImage;
 };
