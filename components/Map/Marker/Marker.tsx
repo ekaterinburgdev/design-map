@@ -1,9 +1,10 @@
-import React from 'react';
+/* eslint-disable no-console */
+import React, { useContext } from 'react';
 import L from 'leaflet';
 import { Marker as LeafletMarker } from 'react-leaflet';
 import { MapItem } from 'common/types/map-item';
 import { MARK_TYPE_COLOR } from 'common/constants/colors';
-import { Popup } from '../Popup';
+import { MapContext } from '../MapProvider';
 import marker from './marker.svg';
 import styles from './Marker.module.css';
 
@@ -12,6 +13,11 @@ interface Props {
 }
 
 export function Marker({ placemark }: Props) {
+    const { openPopup } = useContext(MapContext);
+    const onClick = () => {
+        openPopup(placemark.name);
+    };
+
     const icon = new L.DivIcon({
         popupAnchor: [0, -5],
         iconSize: [40, 40],
@@ -26,8 +32,6 @@ export function Marker({ placemark }: Props) {
     });
 
     return (
-        <LeafletMarker icon={icon} position={placemark.coords}>
-            <Popup placemark={placemark} />
-        </LeafletMarker>
+        <LeafletMarker icon={icon} position={placemark.coords} eventHandlers={{ click: onClick }} />
     );
 }

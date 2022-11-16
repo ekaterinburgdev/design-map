@@ -1,6 +1,7 @@
 @import './font';
 @import './checkbox.css';
 @import './leaflet.css';
+@import './modal.css';
 
 * {
     box-sizing: border-box;

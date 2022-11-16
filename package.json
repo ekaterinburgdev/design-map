@@ -15,6 +15,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.2",
     "classnames": "^2.3.2",
+    "framer-motion": "^7.6.7",
     "leaflet": "^1.9.2",
     "lodash": "^4.17.21",
     "memory-cache": "^0.2.0",
@@ -23,7 +24,8 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-leaflet": "^4.1.0"
+    "react-leaflet": "^4.1.0",
+    "react-modal-sheet": "^1.8.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.0",
