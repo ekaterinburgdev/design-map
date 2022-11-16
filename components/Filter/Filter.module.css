@@ -1,7 +1,7 @@
 .filter {
     position: fixed;
     top: 10px;
-    left: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
     background-color: black;

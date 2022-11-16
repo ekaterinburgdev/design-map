@@ -1,60 +1,22 @@
-import React, { useMemo } from 'react';
-import { Popup as LeafletPopup } from 'react-leaflet';
-import { MapItem } from 'common/types/map-item';
-import { MARK_TYPE_COLOR } from 'common/constants/colors';
-import styles from './Popup.module.css';
+import React, { useContext, useMemo } from 'react';
+import { Modal } from 'components/Modal';
+import { isMobile } from 'common/isMobile';
+import { MapContext } from '../MapProvider';
+import { PopupContent } from './PopupContent';
 
-interface Props {
-    placemark: MapItem;
-}
+export function Popup() {
+    const { popup, closePopup } = useContext(MapContext);
 
-export function Popup({ placemark }: Props) {
-    const date = useMemo(() => {
-        try {
-            const formatter = new Intl.DateTimeFormat('ru', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
+    const size = useMemo(() => {
+        const mobileSize = popup?.images?.length ? 0.85 : 0.50;
+        const desktopSize = 100;
 
-            return formatter.format(new Date(placemark.date));
-        } catch (e) {
-            return null;
-        }
-    }, [placemark.date]);
+        return isMobile ? mobileSize : desktopSize;
+    }, [popup?.images?.length]);
 
     return (
-        <LeafletPopup className={styles.popup}>
-            <h2 className={styles.popup__title}>{placemark.name}</h2>
-            {placemark.name !== placemark.description && (
-                <div className={styles.popup__description}>{placemark.description}</div>
-            )}
-            {placemark.street && (
-                <address className={styles.popup__address}>{placemark.street}</address>
-            )}
-            <div style={{ color: MARK_TYPE_COLOR[placemark.type] }} className={styles.popup__type}>
-                {placemark.type}
-            </div>
-            {date && (
-                <div className={styles.popup__date}>
-                    C
-                    {' '}
-                    {date}
-                </div>
-            )}
-            <div className={styles.popup__images}>
-                {placemark.images.map((src) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        key={src.id}
-                        src={src.m.src}
-                        width={src.m.width}
-                        height={src.m.height}
-                        className={styles.popup__image}
-                        alt={placemark.name}
-                    />
-                ))}
-            </div>
-        </LeafletPopup>
+        <Modal size={size} isOpen={!!popup} close={closePopup}>
+            <PopupContent placemark={popup} />
+        </Modal>
     );
 }
