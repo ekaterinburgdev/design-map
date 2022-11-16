@@ -11,12 +11,16 @@ import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 import { Filter } from 'components/Filter/Filter';
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 import { MapItem } from 'common/types/map-item';
+import { isMobile } from 'common/isMobile';
 
 import { Marker } from '../Marker';
 import { MapContext } from '../MapProvider';
+import { Popup } from '../Popup';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
+
+const DEFAULT_ZOOM = isMobile ? 12 : 15;
 
 function MapMainContainer() {
     const position: [number, number] = COORDS_EKATERINBURG;
@@ -52,13 +56,14 @@ function MapMainContainer() {
 
     return (
         <>
+            <Popup />
             <Filter />
             <MapContainer
                 center={position}
                 scrollWheelZoom
                 attributionControl={null}
                 zoomControl={false}
-                zoom={16}
+                zoom={DEFAULT_ZOOM}
                 className={styles.Map}
             >
                 <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />

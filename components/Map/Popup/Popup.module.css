@@ -1,43 +1,46 @@
 .popup  {
-    background-color: #000;
     overflow: auto;
-    width: 300px;
-    max-height: 80vh;
-    border-radius: 5px;
     font-family: 'Iset Sans', sans-serif;
+    height: 100%;
+}
+
+.popup__content {
+    padding: 12px;
+}
+
+.popup__coords {
+    opacity: .5;
+    font-size: 10px;
+    line-height: 1;
+    margin-top: 4px;
 }
 
 .popup__title {
-    margin: 0;
-    font-size: 20px;
-}
-
-.popup__description {
-    font-size: 14px;
+    margin: 8px 40px 0 0;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.1;
 }
 
 .popup__address {
-    margin-top: 12px;
+    margin-top: 10px;
+    font-style: normal;
+    font-size: 15px;
 }
 
-.popup__type {
-    margin-top: 4px;
-}
-
-.popup__date {
-    opacity: 0.5;
-    margin-top: 4px;
+.popup__info {
+    margin: 12px;
 }
 
 .popup__images {
-    margin-top: 12px;
+    margin-top: 24px;
 }
 
-.popup__image {
+.popup__image,
+.popup__preview {
     display: block;
     width: 100%;
     height: auto;
-    margin-bottom: 12px;
     min-height: 100px;
     background-color: gray;
 }

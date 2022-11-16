@@ -132,8 +132,8 @@ async function resize(items) {
 
     return Promise.all(
         items.map(async ({ id, path }) => {
-            const m = await resizeOne(path, 600, 'm');
-            const s = await resizeOne(path, 48, 's');
+            const m = await resizeOne(path, 800, 'm');
+            const s = await resizeOne(path, 80, 's');
             return { id, m, s, path };
         }),
     );
