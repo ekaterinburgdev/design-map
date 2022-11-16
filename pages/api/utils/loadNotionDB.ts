@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import fetch from 'node-fetch';
-import extractNotionValue from './extract-notion-value';
+import { extractNotionValues } from './extractNotionValues';
 
-async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28') {
+export async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28') {
     const requestHeaders = {
         Authorization: `Bearer ${notionToken}`,
         'Notion-Version': notionVersion,
@@ -39,8 +39,6 @@ async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28')
         .map((property) => Object.fromEntries(
             Object.entries(property)
                 // TODO Add Notion Type
-                .map(([key, value] : [any, any]) => [key, extractNotionValue(value, value.type)]),
+                .map(([key, value] : [any, any]) => [key, extractNotionValues(value, value.type)]),
         ));
 }
-
-export default loadNotionDB;

@@ -44,7 +44,15 @@ export function Popup({ placemark }: Props) {
             )}
             <div className={styles.popup__images}>
                 {placemark.images.map((src) => (
-                    <img key={src} src={src} className={styles.popup__image} alt={placemark.name} />
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                        key={src.id}
+                        src={src.m.src}
+                        width={src.m.width}
+                        height={src.m.height}
+                        className={styles.popup__image}
+                        alt={placemark.name}
+                    />
                 ))}
             </div>
         </LeafletPopup>
