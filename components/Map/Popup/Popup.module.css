@@ -36,6 +36,7 @@
 .popup__image {
     display: block;
     width: 100%;
+    height: auto;
     margin-bottom: 12px;
     min-height: 100px;
     background-color: gray;
