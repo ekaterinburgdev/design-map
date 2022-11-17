@@ -36,19 +36,21 @@ log('Prepare images:')()
 async function getImagesUrls() {
     let response = await notion.databases.query({
         database_id: process.env.NOTION_DATABASE,
+        page_size: 10000,
     });
     let results = response.results || [];
 
     while (response.next_cursor) {
         response = await notion.databases.query({
             database_id: process.env.NOTION_DATABASE,
+            page_size: 10000,
             start_cursor: response.next_cursor,
         });
 
         results = [...results, ...response.results];
     }
 
-    const urls = response.results
+    const urls = results
         .map((x) => x.properties)
         .flatMap((item) =>
             Object.values(item)

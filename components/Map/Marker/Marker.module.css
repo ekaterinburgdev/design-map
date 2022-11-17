@@ -1,7 +1,7 @@
 .marker {
     object-fit: cover;
     border-radius: 100px;
-    border-width: 3px;
+    border-width: 2px;
     border-style: solid;
     border-radius: 100%;
     width: 40px !important;
