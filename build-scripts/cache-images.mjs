@@ -9,57 +9,45 @@ import imageminPngquant from 'imagemin-pngquant';
 import imageminSvgo from 'imagemin-svgo';
 
 dotenv.config();
+const notion = new Client({ auth: process.env.NOTION_TOKEN });
+
 const VERCEL_OUTPUT_PATH = './public/notion-static/';
 const IMAGES_URLS_PATH = VERCEL_OUTPUT_PATH + 'images/';
-const CACHE_URLS_PATH = VERCEL_OUTPUT_PATH + 'cache.json';
 const CACHE_IMAGEIDS_PATH = VERCEL_OUTPUT_PATH + 'images.json';
 
-clearCachedImages(IMAGES_URLS_PATH)
-    .then(withLog('Get images list from Notion'))
-    .then(withCache(CACHE_URLS_PATH, getImagesUrls))
-    .then(withLog('Download images'))
-    .then((urls) => urls.slice(0, 100)) // TODO: remove slice that caused by ETIMEDOUT error
+const start = Date.now()
+log('Prepare images:')()
+    .then(clearCachedImages(IMAGES_URLS_PATH))
+    .then(log('Get images list from Notion'))
+    .then(getImagesUrls)
+    .then(log('Download',(urls) => `${urls.length} images`))
     .then(download)
-    .then(withLog('Resize images'))
+    .then(log('Resize images'))
     .then(resize)
-    .then(withLog('Remove original size images'))
+    .then(log('Remove original size images'))
     .then(removeOriginalImages)
-    .then(withLog('Optimize images'))
+    .then(log('Optimize images'))
     .then(optimize)
-    .then(withLog('Save metadata'))
+    .then(log('Save metadata'))
     .then(saveMetadata(CACHE_IMAGEIDS_PATH))
-    .then(withLog('Finish'))
+    .then(log('Finish in', () => `${(Date.now() - start) / 1000} seconds`))
     .catch(console.log);
 
-function withCache(path, cb) {
-    return async () => {
-        // DEBUG: uncomment for debug cache
-        // if (fs.existsSync(path)) {
-        //     const cached = await fs.readFileSync(path);
-        //     if (cached) return JSON.parse(cached);
-        // }
-
-        const result = await cb();
-
-        await fs.writeFileSync(path, JSON.stringify(result));
-
-        return result;
-    };
-}
-
-function withLog(message) {
-    return (...args) => {
-        console.log(message);
-        return Promise.resolve(...args);
-    };
-}
-
 async function getImagesUrls() {
-    const notion = new Client({ auth: process.env.NOTION_TOKEN });
-    const response = await notion.databases.query({
+    let response = await notion.databases.query({
         database_id: process.env.NOTION_DATABASE,
-        page_size: 10000,
     });
+    let results = response.results || [];
+
+    while (response.next_cursor) {
+        response = await notion.databases.query({
+            database_id: process.env.NOTION_DATABASE,
+            start_cursor: response.next_cursor,
+        });
+
+        results = [...results, ...response.results];
+    }
+
     const urls = response.results
         .map((x) => x.properties)
         .flatMap((item) =>
@@ -67,7 +55,7 @@ async function getImagesUrls() {
                 .filter((x) => x.type === 'files')
                 .flatMap((x) => x.files.flatMap((x) => x?.file?.url)),
         );
-    fs.writeFileSync(CACHE_URLS_PATH, JSON.stringify(urls));
+
     return urls;
 }
 
@@ -159,6 +147,13 @@ function saveMetadata(path) {
             return all;
         }, {});
         fs.writeFileSync(path, JSON.stringify(byId));
+    };
+}
+
+function log(message = '', getMessage = () => '') {
+    return (...args) => {
+        console.log(message, getMessage(...args));
+        return Promise.resolve(...args);
     };
 }
 
