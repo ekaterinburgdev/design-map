@@ -69,7 +69,7 @@ function MapMainContainer() {
                 <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
                 {selectedMarks.map((placemark: MapItem) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <Marker key={`${placemark.name}${placemark.street}`} placemark={placemark} />
+                    <Marker key={`${placemark.coords[0]}${placemark.coords[1]}`} placemark={placemark} />
                 ))}
             </MapContainer>
         </>
