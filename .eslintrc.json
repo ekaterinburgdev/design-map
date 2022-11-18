@@ -3,6 +3,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["/*.js", "build-scripts/**/*.js"],
   "rules": {
     "indent": ["error", 4],
     "no-console": ["error", { "allow": ["error"] }],
