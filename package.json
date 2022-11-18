@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "pnpm run preload-static && next build",
     "start": "next start",
-    "preload-static": "node ./build-scripts/cache-images.mjs",
+    "preload-static": "node ./build-scripts/cache-images.js",
     "lint": "next lint",
     "postinstall": "pnpm preload-static",
     "devPreinstall": "husky install"
