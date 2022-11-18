@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run preload-static && next build",
+    "build": "pnpm run preload-static && next build",
     "start": "next start",
     "preload-static": "node ./build-scripts/cache-images.mjs",
     "lint": "next lint",
