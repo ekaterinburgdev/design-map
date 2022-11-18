@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import { uniqBy } from 'lodash';
 import { MapItem, MapItemType } from 'common/types/map-item';
+import { usePopup } from './usePopup';
 
+type PopupId = MapItem['id'];
 interface IMapContext {
     placemarks: MapItem[];
     savePlacemarks: (marks: MapItem[]) => void;
@@ -11,7 +13,7 @@ interface IMapContext {
     selectedMarksTypes: MapItemType[];
     filterMarks: (items: MapItemType[]) => void;
     popup: MapItem | null;
-    openPopup: (p: MapItem) => void;
+    openPopup: (p: PopupId) => void;
     closePopup: VoidFunction;
 }
 
@@ -34,8 +36,8 @@ const getUniqTypes = (all: MapItem[]) => uniqBy(all, (mark) => mark.type).map((m
 
 export function MapContextProvider({ children }: Props) {
     const [placemarks, setMarks] = useState<MapItem[]>([]);
-    const [popup, setOpenedPopup] = useState<MapItem>(null);
     const [selectedMarksTypes, setSelectedMarks] = useState<MapItemType[]>([]);
+    const { popup, openPopup, closePopup } = usePopup(placemarks);
 
     const filterMarks = useCallback(
         (items: MapItemType[]) => setSelectedMarks(items),
@@ -51,9 +53,6 @@ export function MapContextProvider({ children }: Props) {
     );
 
     const allMarksTypes = useMemo(() => getUniqTypes(placemarks), [placemarks]);
-
-    const openPopup = useCallback((p: MapItem) => setOpenedPopup(p), []);
-    const closePopup = useCallback(() => setOpenedPopup(null), []);
 
     const value = useMemo(
         () => ({

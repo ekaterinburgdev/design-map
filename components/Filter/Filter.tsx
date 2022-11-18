@@ -4,7 +4,7 @@ import { groupBy } from 'lodash';
 
 import { MARKER_FILTER_COLOR } from 'common/constants/colors';
 import { MapItem } from 'common/types/map-item';
-import { MapContext } from 'components/Map/MapProvider';
+import { MapContext } from 'components/Map/providers/MapProvider';
 
 import styles from './Filter.module.css';
 import { FilterItem } from './FilterItem';

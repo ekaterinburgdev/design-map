@@ -14,7 +14,7 @@ import { MapItem } from 'common/types/map-item';
 import { isMobile } from 'common/isMobile';
 
 import { Marker } from '../Marker';
-import { MapContext } from '../MapProvider';
+import { MapContext } from '../providers/MapProvider';
 import { Popup } from '../Popup';
 
 import styles from './MapMainContainer.module.css';
