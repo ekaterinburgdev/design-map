@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import classNames from 'classnames';
 import { MapItem } from 'common/types/map-item';
+import { useCopyHref } from 'components/helpers/useCopyHref';
 import styles from './Popup.module.css';
 import { Info } from './components/Info';
 
@@ -9,6 +11,8 @@ interface Props {
 }
 
 export function PopupContent({ placemark }: Props) {
+    const { isCopied, onCopy } = useCopyHref(window.location.href);
+
     return (
         <div className={styles.popup}>
             <div className={styles.popup__content}>
@@ -21,6 +25,18 @@ export function PopupContent({ placemark }: Props) {
                 {placemark.street && (
                     <address className={styles.popup__address}>{placemark.street}</address>
                 )}
+                <button
+                    type="button"
+                    className={
+                        classNames(styles.popup__share, {
+                            [styles.popup__share_copied]: isCopied,
+                        })
+                    }
+                    onClick={onCopy}
+                    disabled={isCopied}
+                >
+                    {isCopied ? 'Скопировано' : 'Скопировать ссылку на объект'}
+                </button>
             </div>
             <div className={styles.popup__info}>
                 <Info placemark={placemark} />

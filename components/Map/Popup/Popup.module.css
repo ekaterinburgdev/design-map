@@ -33,7 +33,7 @@
 }
 
 .popup__images {
-    margin-top: 24px;
+    margin: 24px 5px 0;
 }
 
 .popup__image {
@@ -42,4 +42,33 @@
     height: auto;
     min-height: 100px;
     background-color: gray;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.popup__share {
+    border: none;
+    appearance: none;
+    background: none;
+    border: none;   
+    padding: 4px 8px 3px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1;
+    color: #ffd400;
+    border: 1px solid;
+    border-radius: 8px;
+    margin: 8px 0 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.popup__share_copied,
+.popup__share:hover {
+    color: white;
+}
+
+.popup__share_copied {
+    cursor: default;
+    opacity: 0.5;
 }

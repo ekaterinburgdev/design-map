@@ -35,10 +35,12 @@ export async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-
     }
 
     return results
-        .map(({ properties }) => properties)
-        .map((property) => Object.fromEntries(
-            Object.entries(property)
-                // TODO Add Notion Type
-                .map(([key, value] : [any, any]) => [key, extractNotionValues(value, value.type)]),
-        ));
+        .map(({ id, properties }) => ({
+            id,
+            ...Object.fromEntries(
+                Object.entries(properties)
+                    // TODO Add Notion Type
+                    .map(([key, value]:any) => [key, extractNotionValues(value, value.type)]),
+            ),
+        }));
 }

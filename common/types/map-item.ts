@@ -28,6 +28,7 @@ export type MapItemImage = {
 };
 
 export type MapItem = {
+    id: string;
     name: string;
     type: MapItemType;
     coords: LatLngExpression;

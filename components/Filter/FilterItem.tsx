@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MapItemType } from 'common/types/map-item';
-import { MapContext } from 'components/Map/MapProvider';
+import { MapContext } from 'components/Map/providers/MapProvider';
 
 import styles from './Filter.module.css';
 
