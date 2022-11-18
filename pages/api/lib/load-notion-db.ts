@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import fetch from 'node-fetch';
-import { extractNotionValues } from './extractNotionValues';
+import { extractNotionValues } from './extract-notion-values';
 
 export async function loadNotionDB(notionDB, notionToken, notionVersion = '2022-06-28') {
     const requestHeaders = {
