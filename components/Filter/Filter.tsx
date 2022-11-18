@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { groupBy } from 'lodash';
 
-import { MARK_TYPE_COLOR } from 'common/constants/colors';
+import { MARKER_FILTER_COLOR } from 'common/constants/colors';
 import { MapItem } from 'common/types/map-item';
 import { MapContext } from 'components/Map/MapProvider';
 
@@ -23,7 +23,7 @@ export function Filter() {
             name: type,
             count: itemsByType[type].length,
             checked: selectedMarksTypes.includes(type),
-            color: MARK_TYPE_COLOR[type],
+            color: MARKER_FILTER_COLOR[type],
         })),
         [allMarksTypes, selectedMarksTypes, itemsByType],
     );
