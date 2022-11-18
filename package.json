@@ -10,6 +10,7 @@
     "start": "next start",
     "preload-static": "node ./build-scripts/cache-images.mjs",
     "lint": "next lint",
+    "postinstall": "pnpm preload-static",
     "devPreinstall": "husky install"
   },
   "dependencies": {
