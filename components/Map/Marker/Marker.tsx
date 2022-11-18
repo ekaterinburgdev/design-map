@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from 'react';
 import L from 'leaflet';
 import { Marker as LeafletMarker } from 'react-leaflet';
 import { MapItem } from 'common/types/map-item';
-import { MARK_TYPE_COLOR } from 'common/constants/colors';
+import { MARKER_COLOR } from 'common/constants/colors';
 import { MapContext } from '../MapProvider';
 import styles from './Marker.module.css';
 
@@ -22,11 +22,11 @@ export function Marker({ placemark }: Props) {
             return `<img
                 src="${placemark.preview.s.src}"
                 class="${styles.marker}"
-                style="color:${MARK_TYPE_COLOR[placemark.type]};"
+                style="color:${MARKER_COLOR[placemark.type]};"
             />`;
         }
 
-        return `<div class="${styles.marker}" style="color:${MARK_TYPE_COLOR[placemark.type]};" />`;
+        return `<div class="${styles.marker}" style="color:${MARKER_COLOR[placemark.type]};" />`;
     }, [placemark]);
 
     const icon = new L.DivIcon({
