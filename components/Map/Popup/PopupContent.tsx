@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import classNames from 'classnames';
-import { MapItem } from 'common/types/map-item';
+import Image from 'next/image';
 import { useCopyHref } from 'components/helpers/useCopyHref';
+import { MapItem } from 'common/types/map-item';
 import styles from './Popup.module.css';
 import { Info } from './components/Info';
 
@@ -43,7 +44,7 @@ export function PopupContent({ placemark }: Props) {
             </div>
             <div className={styles.popup__images}>
                 {placemark.images.map((src) => (
-                    <img
+                    <Image
                         key={src.id}
                         src={src.m.src}
                         width={src.m.width}

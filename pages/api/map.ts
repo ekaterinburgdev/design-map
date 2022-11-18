@@ -1,36 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import slug from 'slug';
 import cacheData from 'memory-cache';
-import { loadNotionDB } from './utils/loadNotionDB';
+import placemarks from '../../public/notion-static/placemarks.json';
 
-const { NOTION_TOKEN, NOTION_DATABASE } = process.env;
-
-function getCoords(coords: string) {
-    return coords.split(', ').map((x) => Number(x));
-}
-
-function getShortId(uuid: string): string {
-    try {
-        return uuid.split('-')[0];
-    } catch (e) {
-        return uuid;
-    }
-}
-
-async function getMapItems() {
-    const mapItemsDB = await loadNotionDB(NOTION_DATABASE, NOTION_TOKEN);
-    return mapItemsDB.map((item) => ({
-        id: slug(`${item.Name}-${getShortId(item.id)}`),
-        name: item.Name,
-        type: item.Type,
-        description: item.Description,
-        coords: getCoords(item.Coords),
-        street: item.Street,
-        images: item.Images,
-        preview: item.Images[0],
-        date: item.Date,
-    }));
-}
+const render = () => placemarks.map((mark) => ({
+    ...mark,
+    preview: mark.images[0],
+}));
 
 async function withCache(cacheKey, cb) {
     const value = cacheData.get(cacheKey);
@@ -46,8 +21,8 @@ async function withCache(cacheKey, cb) {
     return data;
 }
 
-async function handler(_: NextApiRequest, res: NextApiResponse) {
-    const mapItems = await withCache('NOTION_DATABASE', getMapItems);
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const mapItems = await withCache('NOTION_DATABASE', render);
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).json(mapItems);

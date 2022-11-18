@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames';
 import React from 'react';
 import styles from './Footer.module.css';
