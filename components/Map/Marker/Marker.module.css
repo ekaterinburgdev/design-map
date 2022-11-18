@@ -1,15 +1,14 @@
 .marker {
     object-fit: cover;
     border-radius: 100px;
-    border-width: 2px;
+    border-width: 3px;
     border-style: solid;
+    border-color: currentColor;
     border-radius: 100%;
     width: 40px !important;
     height: 40px !important;
     cursor: pointer;
     transition: all .3s;
-}
-
-.marker:not(:hover) {
-    background-color: black !important;
+    background-color: black;
+    position: relative;
 }
