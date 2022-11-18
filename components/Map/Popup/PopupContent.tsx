@@ -9,21 +9,8 @@ interface Props {
 }
 
 export function PopupContent({ placemark }: Props) {
-    const firstImage = placemark.images[0];
-    const restImages = placemark.images.slice(1);
-
     return (
         <div className={styles.popup}>
-            {firstImage && (
-                <img
-                    key={firstImage.id}
-                    src={firstImage.m.src}
-                    width={firstImage.m.width}
-                    height={firstImage.m.height}
-                    className={styles.popup__preview}
-                    alt={placemark.name}
-                />
-            )}
             <div className={styles.popup__content}>
                 <div className={styles.popup__coords}>
                     {placemark.coords[0]}
@@ -39,7 +26,7 @@ export function PopupContent({ placemark }: Props) {
                 <Info placemark={placemark} />
             </div>
             <div className={styles.popup__images}>
-                {restImages.map((src) => (
+                {placemark.images.map((src) => (
                     <img
                         key={src.id}
                         src={src.m.src}
