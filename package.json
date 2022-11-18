@@ -4,6 +4,7 @@
   "homepage": "https://map.ekaterinburg.dev",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "pnpm run preload-static && next build",
