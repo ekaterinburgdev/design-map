@@ -15,7 +15,7 @@ interface Props {
 export function Marker({ placemark }: Props) {
     const { openPopup } = useContext(MapContext);
     const onClick = () => {
-        openPopup(placemark.name);
+        openPopup(placemark);
     };
 
     const icon = new L.DivIcon({
