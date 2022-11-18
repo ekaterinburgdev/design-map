@@ -7,3 +7,17 @@
 .leaflet-container {
     background: none !important;
 }
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+    background-color: black;
+    color: white;
+}
+
+.leaflet-div-icon {
+    background: none !important;
+    border: none !important;
+}
+
+.leaflet-popup-tip-container {
+    display: none
+}
