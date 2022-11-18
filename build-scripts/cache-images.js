@@ -73,7 +73,6 @@ async function download(urls) {
     const downloadItem = (url) =>
         new Promise((resolve, reject) => {
             const [filename] = new URL(url).pathname.split('/').slice(-1);
-            console.log(filename);
             const ext = filename.split('.').slice(-1)[0];
             const notionGUID = getNotionGUID(url);
             const outputFilename = notionGUID ? `${notionGUID}.${ext}` : filename;
