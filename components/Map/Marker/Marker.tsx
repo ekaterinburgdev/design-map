@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { Marker as LeafletMarker } from 'react-leaflet';
 import { MapItem } from 'common/types/map-item';
 import { MARKER_COLOR } from 'common/constants/colors';
-import { MapContext } from '../MapProvider';
+import { MapContext } from '../providers/MapProvider';
 import styles from './Marker.module.css';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 export function Marker({ placemark }: Props) {
     const { openPopup } = useContext(MapContext);
     const onClick = () => {
-        openPopup(placemark);
+        openPopup(placemark.id);
     };
 
     const html = useMemo(() => {

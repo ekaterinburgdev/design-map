@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { Modal } from 'components/Modal';
 import { isMobile } from 'common/isMobile';
-import { MapContext } from '../MapProvider';
+import { MapContext } from '../providers/MapProvider';
 import { PopupContent } from './PopupContent';
 
 export function Popup() {
