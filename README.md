@@ -57,7 +57,7 @@ https://map.ekaterinburg.design/api/map
 NOTION_TOKEN=
 NOTION_DATABASE=
 
-# Set `true` to prevent caching Notion responses in development mode
+# Set `false` to prevent caching Notion responses in development mode
 NOTION_DEV_CACHE_ENABLED=true
 ```
 
