@@ -36,8 +36,7 @@
     margin-top: 24px;
 }
 
-.popup__image,
-.popup__preview {
+.popup__image {
     display: block;
     width: 100%;
     height: auto;
