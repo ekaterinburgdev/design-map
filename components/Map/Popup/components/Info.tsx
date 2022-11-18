@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { MapItem } from 'common/types/map-item';
 import styles from './Info.module.css';
 
@@ -7,26 +7,12 @@ interface Props {
 }
 
 export function Info({ placemark }: Props) {
-    const date: string = useMemo(() => {
-        try {
-            const formatter = new Intl.DateTimeFormat('ru', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
-
-            return formatter.format(new Date(placemark.date));
-        } catch (e) {
-            return null;
-        }
-    }, [placemark.date]);
     const type = String(placemark.type);
     const description = placemark.name !== placemark.description ? placemark.description : null;
 
     const items: { key: string, value: string }[] = [
-        { key: 'Дата чего-то ;)', value: date },
         { key: 'Тип объекта', value: type },
-    ];
+    ].filter((item) => item.value);
 
     if (!description && items.length === 0) return null;
 
