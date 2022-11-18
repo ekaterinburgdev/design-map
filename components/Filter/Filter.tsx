@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { groupBy } from 'lodash';
