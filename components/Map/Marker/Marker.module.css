@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.marker:hover {
+    border-width: 6px;
+}
+
 .marker.marker_open {
     border-width: 6px;
     z-index: 9999 !important;
