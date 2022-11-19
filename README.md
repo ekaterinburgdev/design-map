@@ -1,8 +1,8 @@
 # Ekaterinburg Map
 
-Map for Ekaterinburg urbanists
+🎨 Map of ekaterinburg.design objects
 
-**[map.ekaterinburg.dev](https://map.ekaterinburg.dev)**
+**[map.ekaterinburg.design](https://map.ekaterinburg.design)**
 
 ## Tools
 
