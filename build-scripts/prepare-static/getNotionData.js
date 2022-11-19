@@ -1,4 +1,5 @@
 import dotenv from 'dotenv-flow';
+import slug from 'slug';
 import { Client } from '@notionhq/client';
 
 dotenv.config();
@@ -29,7 +30,7 @@ export async function getPlacemarksData() {
             ),
         }))
         .map((item) => ({
-            id: item.id,
+            id: slug(`${item.Name}-${getShortId(item.id)}`),
             name: item.Name,
             type: item.Type,
             description: item.Description,
@@ -69,5 +70,13 @@ function extractNotionValues(notionValue, notionType) {
         return notionValue.phone_number;
     default:
         return '';
+    }
+}
+
+function getShortId(uuid) {
+    try {
+        return uuid.split('-')[0];
+    } catch (e) {
+        return uuid;
     }
 }
