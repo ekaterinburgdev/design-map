@@ -1,42 +1,66 @@
 /* eslint-disable no-console */
-import React, { useContext, useMemo } from 'react';
-import L from 'leaflet';
+import React, { memo, useMemo } from 'react';
 import { Marker as LeafletMarker } from 'react-leaflet';
-import { MapItem } from 'common/types/map-item';
+import L from 'leaflet';
+import classNames from 'classnames';
+import { MapItemType } from 'common/types/map-item';
 import { MARKER_COLOR } from 'common/constants/colors';
-import { MapContext } from '../providers/MapProvider';
+import { IMapContext } from '../providers/MapProvider';
 import styles from './Marker.module.css';
 
 interface Props {
-    placemark: MapItem;
+    id: string;
+    name: string;
+    type: MapItemType;
+    x: number;
+    y: number;
+    preview: string | null;
+    isOpen: boolean;
+    openPopup: IMapContext['openPopup'];
 }
 
-export function Marker({ placemark }: Props) {
-    const { openPopup } = useContext(MapContext);
-    const onClick = () => {
-        openPopup(placemark.id);
-    };
-
+function Placemark({
+    id, type, x, y, name, preview, isOpen, openPopup,
+}: Props) {
+    const onClick = () => openPopup(id);
+    const size = isOpen ? 64 : 40;
     const html = useMemo(() => {
-        if (placemark?.preview?.s?.src) {
+        const style = `
+            width:${size}px;
+            height:${size}px;
+            color:${MARKER_COLOR[type]};
+        `;
+
+        const className = classNames(styles.marker, {
+            [styles.marker_open]: isOpen,
+        });
+
+        if (preview) {
             return `<img
-                src="${placemark.preview.s.src}"
-                class="${styles.marker}"
-                style="color:${MARKER_COLOR[placemark.type]};"
-                alt="${placemark.name}"
+                src="${preview}"
+                class="${className}"
+                style="${style}"
+                alt="${name}"
             />`;
         }
 
-        return `<div class="${styles.marker}" style="color:${MARKER_COLOR[placemark.type]};" />`;
-    }, [placemark]);
+        return `<div class="${className}" style="${style}" />`;
+    }, [isOpen, name, preview, size, type]);
 
     const icon = new L.DivIcon({
         popupAnchor: [0, -5],
-        iconSize: [40, 40],
+        iconSize: [size, size],
         html,
     });
 
     return (
-        <LeafletMarker icon={icon} position={placemark.coords} eventHandlers={{ click: onClick }} />
+        <LeafletMarker
+            zIndexOffset={isOpen ? 9999 : undefined}
+            icon={icon}
+            position={[x, y]}
+            eventHandlers={{ click: onClick }}
+        />
     );
 }
+
+export const Marker = memo(Placemark);

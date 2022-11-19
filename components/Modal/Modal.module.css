@@ -12,6 +12,7 @@
     right: 4px;
     z-index: 1;
     transition: all .3s ease-out;
+    line-height: 1;
     cursor: pointer;
     color: gray;
 }

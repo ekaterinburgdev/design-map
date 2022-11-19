@@ -6,7 +6,7 @@ import { MapItem, MapItemType } from 'common/types/map-item';
 import { usePopup } from './usePopup';
 
 type PopupId = MapItem['id'];
-interface IMapContext {
+export interface IMapContext {
     placemarks: MapItem[];
     savePlacemarks: (marks: MapItem[]) => void;
     allMarksTypes: MapItemType[];
