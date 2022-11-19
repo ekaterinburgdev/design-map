@@ -26,7 +26,9 @@ interface Props {
 
 function MapMainContainer({ placemarksData }: Props) {
     const position: [number, number] = COORDS_EKATERINBURG;
-    const { placemarks, selectedMarksTypes, savePlacemarks } = useContext(MapContext);
+    const {
+        placemarks, popup, selectedMarksTypes, savePlacemarks, openPopup,
+    } = useContext(MapContext);
 
     useEffect(() => {
         async function init() {
@@ -42,9 +44,11 @@ function MapMainContainer({ placemarksData }: Props) {
         init();
     }, [savePlacemarks, placemarksData]);
 
-    const selectedMarks = useMemo(
-        () => placemarks.filter((mark) => selectedMarksTypes.includes(mark.type)),
-        [selectedMarksTypes, placemarks],
+    const selectedMarks: (MapItem & { isOpen: boolean })[] = useMemo(
+        () => placemarks
+            .filter((mark) => selectedMarksTypes.includes(mark.type))
+            .map((m) => ({ ...m, isOpen: m.id === popup?.id })),
+        [placemarks, selectedMarksTypes, popup?.id],
     );
 
     return (
@@ -60,9 +64,18 @@ function MapMainContainer({ placemarksData }: Props) {
                 className={styles.Map}
             >
                 <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
-                {selectedMarks.map((placemark: MapItem) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Marker key={`${placemark.name},${placemark.coords[0]}${placemark.coords[1]}`} placemark={placemark} />
+                {selectedMarks.map((placemark) => (
+                    <Marker
+                        key={placemark.id}
+                        id={placemark.id}
+                        type={placemark.type}
+                        name={placemark.name}
+                        x={placemark.coords[0]}
+                        y={placemark.coords[1]}
+                        preview={placemark?.preview?.s?.src || null}
+                        isOpen={placemark.isOpen}
+                        openPopup={openPopup}
+                    />
                 ))}
             </MapContainer>
         </>

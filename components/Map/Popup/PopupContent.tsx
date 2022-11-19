@@ -17,30 +17,32 @@ export function PopupContent({ placemark }: Props) {
     return (
         <div className={styles.popup}>
             <div className={styles.popup__content}>
-                <div className={styles.popup__coords}>
-                    {placemark.coords[0]}
-                    {' '}
-                    {placemark.coords[1]}
+                <div className={styles.popup__header}>
+                    <div className={classNames(styles.popup__headeritem, styles.popup__coords)}>
+                        {placemark.coords[0]?.toFixed(6)}
+                        {', '}
+                        {placemark.coords[1]?.toFixed(6)}
+                    </div>
+                    <button
+                        type="button"
+                        className={
+                            classNames(styles.popup__share, styles.popup__headeritem, {
+                                [styles.popup__share_copied]: isCopied,
+                            })
+                        }
+                        onClick={onCopy}
+                        disabled={isCopied}
+                    >
+                        {isCopied ? 'Скопировано' : 'Скопировать ссылку на объект'}
+                    </button>
                 </div>
                 <h2 className={styles.popup__title}>{placemark.name}</h2>
                 {placemark.street && (
                     <address className={styles.popup__address}>{placemark.street}</address>
                 )}
-                <button
-                    type="button"
-                    className={
-                        classNames(styles.popup__share, {
-                            [styles.popup__share_copied]: isCopied,
-                        })
-                    }
-                    onClick={onCopy}
-                    disabled={isCopied}
-                >
-                    {isCopied ? 'Скопировано' : 'Скопировать ссылку на объект'}
-                </button>
-            </div>
-            <div className={styles.popup__info}>
-                <Info placemark={placemark} />
+                <div className={styles.popup__info}>
+                    <Info placemark={placemark} />
+                </div>
             </div>
             <div className={styles.popup__images}>
                 {placemark.images.map((src) => (

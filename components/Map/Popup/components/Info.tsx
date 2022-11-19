@@ -1,34 +1,20 @@
 import React from 'react';
 import { MapItem } from 'common/types/map-item';
+import { MARKER_FILTER_COLOR } from 'common/constants/colors';
 import styles from './Info.module.css';
 
 interface Props {
     placemark: MapItem
 }
 
-export function Info({ placemark }: Props) {
-    const type = String(placemark.type);
-    const description = placemark.name !== placemark.description ? placemark.description : null;
-
-    const items: { key: string, value: string }[] = [
-        { key: 'Тип объекта', value: type },
-    ].filter((item) => item.value);
-
-    if (!description && items.length === 0) return null;
+export function Info({ placemark: { type, name, description } }: Props) {
+    const text = name !== description ? description : null;
+    const color = MARKER_FILTER_COLOR[type];
 
     return (
         <div className={styles.info}>
-            {placemark.description && (
-                <div className={styles.info__description}>{placemark.description}</div>
-            )}
-            {items.map((item) => (
-                <div key={item.key} className={styles.infoitem}>
-                    <div className={styles.infoitem}>
-                        <div className={styles.infoitem__key}>{item.key}</div>
-                        <div className={styles.infoitem__value}>{item.value}</div>
-                    </div>
-                </div>
-            ))}
+            {type && <div className={styles.info__type} style={{ color }}>{type}</div>}
+            {text && <div className={styles.info__description}>{text}</div>}
         </div>
     );
 }
