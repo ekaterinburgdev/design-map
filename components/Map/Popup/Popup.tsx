@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { Modal } from 'components/Modal';
-import { getIsMobile } from 'common/isMobile';
+import { checkIsMobile } from 'common/isMobile';
 import { MapContext } from '../providers/MapProvider';
 import { PopupContent } from './PopupContent';
 
@@ -11,7 +11,7 @@ export function Popup() {
         const mobileSize = popup?.images?.length ? 0.85 : 0.50;
         const desktopSize = 100;
 
-        return getIsMobile() ? mobileSize : desktopSize;
+        return checkIsMobile() ? mobileSize : desktopSize;
     }, [popup?.images?.length]);
 
     return (
