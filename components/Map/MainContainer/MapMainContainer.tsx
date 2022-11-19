@@ -9,7 +9,7 @@ import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 import { Filter } from 'components/Filter/Filter';
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 import { MapItem } from 'common/types/map-item';
-import { getIsMobile } from 'common/isMobile';
+import { checkIsMobile } from 'common/isMobile';
 
 import { Marker } from '../Marker';
 import { MapContext } from '../providers/MapProvider';
@@ -18,7 +18,7 @@ import { Popup } from '../Popup';
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
 
-const DEFAULT_ZOOM = getIsMobile() ? 12 : 15;
+const DEFAULT_ZOOM = checkIsMobile() ? 12 : 15;
 
 interface Props {
     placemarksData: MapItem[];

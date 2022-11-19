@@ -35,4 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-public/notion-static
+public/notion-static/images
+public/notion-static/placemarks.json
