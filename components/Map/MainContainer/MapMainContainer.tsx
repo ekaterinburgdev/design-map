@@ -1,6 +1,4 @@
-import React, {
-    useContext, useEffect, useMemo, useState,
-} from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
@@ -22,9 +20,12 @@ import 'leaflet/dist/leaflet.css';
 
 const DEFAULT_ZOOM = isMobile ? 12 : 15;
 
-function MapMainContainer() {
+interface Props {
+    placemarksData: MapItem[];
+}
+
+function MapMainContainer({ placemarksData }: Props) {
     const position: [number, number] = COORDS_EKATERINBURG;
-    const [isLoaded, setLoaded] = useState(false);
     const { placemarks, selectedMarksTypes, savePlacemarks } = useContext(MapContext);
 
     useEffect(() => {
@@ -35,24 +36,16 @@ function MapMainContainer() {
                 shadowUrl: shadowUrl.src,
             });
 
-            const response = await fetch('/api/map');
-            const placemarksData: MapItem[] = await response.json();
-
             savePlacemarks(placemarksData);
-            setLoaded(true);
         }
 
         init();
-    }, [savePlacemarks]);
+    }, [savePlacemarks, placemarksData]);
 
     const selectedMarks = useMemo(
         () => placemarks.filter((mark) => selectedMarksTypes.includes(mark.type)),
         [selectedMarksTypes, placemarks],
     );
-
-    if (!isLoaded) {
-        return <div className={styles.loader}>Загрузка...</div>;
-    }
 
     return (
         <>
