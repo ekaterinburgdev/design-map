@@ -1,16 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
-import { Map } from 'components/Map';
 import { MapItem } from 'common/types/map-item';
+import { Map } from 'components/Map';
 import { Footer } from 'components/Footer/Footer';
 import { MapContextProvider } from 'components/Map/providers/MapProvider';
-import getMapItems from './api/lib/get-map-items';
+import placemarks from '../public/notion-static/placemarks.json';
 
-interface Props {
-    placemarksData: MapItem[];
-}
-
-export default function Home({ placemarksData }: Props) {
+export default function Home() {
     return (
         <>
             <Head>
@@ -19,17 +15,10 @@ export default function Home({ placemarksData }: Props) {
             </Head>
 
             <MapContextProvider>
-                <Map placemarksData={placemarksData} />
+                <Map placemarksData={placemarks as unknown as MapItem[]} />
             </MapContextProvider>
 
             <Footer />
         </>
     );
-}
-
-export async function getStaticProps() {
-    return {
-        props: { placemarksData: await getMapItems() },
-        revalidate: 60,
-    };
 }

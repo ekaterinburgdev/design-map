@@ -117,6 +117,9 @@ function saveMetadata(cachPath, items, images) {
                 return null;
             })
             .filter((src) => src !== null) || []
+    })).map((mark) => ({
+        ...mark,
+        preview: mark.images?.[0] || null
     }))
 
     fs.writeFileSync(cachPath, JSON.stringify(updatedItems));
