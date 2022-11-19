@@ -23,6 +23,7 @@ export function Marker({ placemark }: Props) {
                 src="${placemark.preview.s.src}"
                 class="${styles.marker}"
                 style="color:${MARKER_COLOR[placemark.type]};"
+                alt="${placemark.name}"
             />`;
         }
 

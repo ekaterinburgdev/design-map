@@ -1,12 +1,9 @@
 .marker {
     object-fit: cover;
-    border-radius: 100px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: currentColor;
+    border: 3px solid currentColor;
     border-radius: 100%;
-    width: 40px !important;
-    height: 40px !important;
+    width: 40px !important; /* leaflet uses !important */
+    height: 40px !important; /* leaflet uses !important */
     cursor: pointer;
     transition: all .3s;
     background-color: black;

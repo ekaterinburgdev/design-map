@@ -56,8 +56,6 @@ https://map.ekaterinburg.design/api/map
 ```sh
 NOTION_TOKEN=
 NOTION_DATABASE=
-# Set `false` to prevent caching Notion responses in development mode
-NOTION_DEV_CACHE_ENABLED=true
 ```
 
 2. Install [Node.js](https://nodejs.org/en/download/) and [pnpm](https://www.npmjs.com/package/pnpm#user-content-install)
