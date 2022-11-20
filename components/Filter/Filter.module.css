@@ -67,7 +67,8 @@
     }
     
     .filter__arrow {
-        display: block;
+        display: flex;
+        margin-left: auto;
     }
 
     .filter__list {
