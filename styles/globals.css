@@ -32,6 +32,7 @@ body {
     font-size: 1em;
 	line-height: 1.4;
     font-weight: 400;
+    overflow: hidden;
 }
 
 ::selection {
@@ -57,3 +58,12 @@ a {
     }
 }
 
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid black;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,.2);
+}
