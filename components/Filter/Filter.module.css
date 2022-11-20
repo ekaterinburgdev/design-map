@@ -13,7 +13,7 @@
     z-index: 999;
     max-height: 80vh;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .filter__arrow {
