@@ -29,7 +29,7 @@ export function Filter({ showHeading = true }: Props) {
             count: itemsByType[type].length,
             checked: selectedMarksTypes.includes(type),
             color: MARKER_FILTER_COLOR[type],
-        })),
+        })).sort((a, b) => b.count - a.count),
         [allMarksTypes, selectedMarksTypes, itemsByType],
     );
 
