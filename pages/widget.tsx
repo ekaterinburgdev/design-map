@@ -6,7 +6,7 @@ import placemarks from 'public/notion-static/placemarks.json';
 export default function Widget() {
     return (
         <MapContextProvider>
-            <Map placemarksData={placemarks} showHeading={false} />
+            <Map placemarksData={placemarks} showFilterHeading={false} />
         </MapContextProvider>
     );
 }
