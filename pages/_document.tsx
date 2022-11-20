@@ -5,8 +5,10 @@ import {
 } from 'next/document';
 
 export default function Document() {
-    const siteTitle = 'Карта дизайн-код Екатеринбурга';
-    const siteDescription = 'Мы отвечаем за всю красоту, комфорт и уют и создаём самый приятный город в России. Мы задаём стандарты дизайна и ведём комплексные проекты: от разработки графики и архитектурных элементов до развития территорий.';
+    const siteUrl = 'https://map.ekaterinburg.design/';
+    const siteTitle = 'Карта объектов Дизайн-кода Екатеринбурга';
+    const ogTitle = 'Дизайн-код Екатеринбурга в жизни';
+    const siteDescription = 'Сколько всего команда «Дизайн-кода» сделала для Екб — все объекты на одной карте.';
 
     return (
         <Html lang="ru">
@@ -16,16 +18,16 @@ export default function Document() {
                 <meta name="description" content={siteDescription} />
 
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://map.ekaterinburg.design/" />
-                <meta property="og:title" content={siteTitle} />
+                <meta property="og:url" content={siteUrl} />
+                <meta property="og:title" content={ogTitle} />
                 <meta property="og:description" content={siteDescription} />
-                <meta property="og:image" content="https://map.ekaterinburg.design/og-preview.jpg" />
+                <meta property="og:image" content={`${siteUrl}/og-preview.jpg`} />
 
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://map.ekaterinburg.design/" />
-                <meta property="twitter:title" content={siteTitle} />
+                <meta property="twitter:url" content={siteUrl} />
+                <meta property="twitter:title" content={ogTitle} />
                 <meta property="twitter:description" content={siteDescription} />
-                <meta property="twitter:image" content="https://map.ekaterinburg.design/og-preview.jpg" />
+                <meta property="twitter:image" content={`${siteUrl}/og-preview.jpg`} />
 
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
