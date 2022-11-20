@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-title-in-document-head */
 import React from 'react';
 import {
     Html, Head, Main, NextScript,
@@ -10,6 +11,7 @@ export default function Document() {
     return (
         <Html lang="ru">
             <Head>
+                <title>{siteTitle}</title>
                 <meta name="theme-color" content="#000000" />
                 <meta name="description" content={siteDescription} />
 
