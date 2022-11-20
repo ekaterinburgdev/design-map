@@ -22,9 +22,11 @@ const DEFAULT_ZOOM = checkIsMobile() ? 12 : 15;
 
 interface Props {
     placemarksData: MapItem[];
+    // eslint-disable-next-line react/require-default-props
+    showHeading?: boolean;
 }
 
-function MapMainContainer({ placemarksData }: Props) {
+function MapMainContainer({ placemarksData, showHeading = true }: Props) {
     const position: [number, number] = COORDS_EKATERINBURG;
     const {
         placemarks, popup, selectedMarksTypes, savePlacemarks, openPopup,
@@ -54,7 +56,7 @@ function MapMainContainer({ placemarksData }: Props) {
     return (
         <>
             <Popup />
-            <Filter />
+            <Filter showHeading={showHeading} />
             <MapContainer
                 center={position}
                 scrollWheelZoom
