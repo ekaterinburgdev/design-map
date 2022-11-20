@@ -9,5 +9,13 @@ tp.disableRule([
 ]);
 
 export default function typographText(text) {
+  if (!text) {
+    return null;
+  }
+
+  try {
     return tp.execute(text) || '';
+  } catch (e) {
+    return null;
+  }
 }
