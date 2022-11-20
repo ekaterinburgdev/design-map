@@ -1,6 +1,7 @@
 import dotenv from 'dotenv-flow';
 import slug from 'slug';
 import { Client } from '@notionhq/client';
+import typographText from './typographText.js';
 
 dotenv.config();
 
@@ -31,9 +32,9 @@ export async function getPlacemarksData() {
         }))
         .map((item) => ({
             id: slug(`${item.Name}-${getShortId(item.id)}`),
-            name: item.Name,
+            name: typographText(item.Name),
             type: item.Type,
-            description: item.Description,
+            description: typographText(item.Description),
             coords: item.Coords.split(', ').map((x) => Number(x)),
             street: item.Street,
             images: item.Images,
