@@ -13,7 +13,6 @@
     display: flex;
     flex-wrap: wrap;
     column-gap: 8px;
-    margin-right: 30px;
 }
 
 .popup__headeritem {
