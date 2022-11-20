@@ -1,5 +1,6 @@
 .popup  {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     font-family: 'Iset Sans', sans-serif;
     height: 100%;
 }
