@@ -4,15 +4,17 @@
 
 **[map.ekaterinburg.design](https://map.ekaterinburg.design)**
 
-## Tools
+## Embed on your website
 
-- [Leaflet](https://leafletjs.com/)
-- [React Leaflet](https://react-leaflet.js.org/)
-- [Next.js](https://nextjs.org/)
-- [Vercel Serverless](https://vercel.com/)
+### <iframe> widget
+You can embed widget in your own site via `<iframe>`
+
+```html
+<iframe src="https://map.ekaterinburg.design/widget" border="0"></iframe>
+```
 
 
-## HTTP API
+### HTTP API
 You can use the site API in your own applications.
 
 ```
@@ -50,6 +52,7 @@ https://map.ekaterinburg.design/api/map
 ]
 ```
 
+
 ## Development
 
 1. Add `.env.local` with Notion keys
@@ -71,3 +74,10 @@ pnpm i
 ```
 pnpm dev
 ```
+
+## Tools
+
+- [Leaflet](https://leafletjs.com/)
+- [React Leaflet](https://react-leaflet.js.org/)
+- [Next.js](https://nextjs.org/)
+- [Vercel Serverless](https://vercel.com/)
