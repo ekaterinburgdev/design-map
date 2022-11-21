@@ -10,8 +10,9 @@ import {
 export default function Document() {
     const siteUrl = 'https://map.ekaterinburg.design/';
     const siteTitle = 'Карта объектов Дизайн-кода Екатеринбурга';
-    const ogTitle = 'Дизайн-код Екатеринбурга в жизни';
     const siteDescription = 'Сколько всего команда «Дизайн-кода» сделала для Екб — все объекты на одной карте.';
+    const ogTitle = 'Дизайн-код Екатеринбурга в жизни';
+    const ogImage = `${siteUrl}og-preview.jpg`;
 
     return (
         <Html lang="ru">
@@ -24,13 +25,13 @@ export default function Document() {
                 <meta property="og:url" content={siteUrl} />
                 <meta property="og:title" content={ogTitle} />
                 <meta property="og:description" content={siteDescription} />
-                <meta property="og:image" content={`${siteUrl}/og-preview.jpg`} />
+                <meta property="og:image" content={ogImage} />
 
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content={siteUrl} />
                 <meta property="twitter:title" content={ogTitle} />
                 <meta property="twitter:description" content={siteDescription} />
-                <meta property="twitter:image" content={`${siteUrl}/og-preview.jpg`} />
+                <meta property="twitter:image" content={ogImage} />
 
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
