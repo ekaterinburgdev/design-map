@@ -11,6 +11,7 @@ import { COORDS_EKATERINBURG } from 'common/constants/coords';
 import { MapItem } from 'common/types/map-item';
 import { checkIsMobile } from 'common/isMobile';
 
+import { Copyright } from 'components/Copyright/Copyright';
 import { Marker } from '../Marker';
 import { MapContext } from '../providers/MapProvider';
 import { Popup } from '../Popup';
@@ -60,7 +61,7 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
             <MapContainer
                 center={position}
                 scrollWheelZoom
-                attributionControl={null}
+                attributionControl={false}
                 zoomControl={false}
                 zoom={DEFAULT_ZOOM}
                 className={styles.Map}
@@ -80,6 +81,8 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
                     />
                 ))}
             </MapContainer>
+
+            <Copyright />
         </>
     );
 }

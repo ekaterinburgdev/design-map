@@ -42,11 +42,17 @@
     bottom: 0;
     right: 0;
     z-index: 100;
-    margin: 0 .5vw .75vw;
+    margin: 0 .5vw 1vw;
     padding: .5vw .5vw .5vw .25vw;
     transition: all .15s ease;
     background-color: #000;
     border-radius: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .footerlinks {
+        margin-bottom: 4vw;
+    }
 }
 
 .footerlinks__item {
