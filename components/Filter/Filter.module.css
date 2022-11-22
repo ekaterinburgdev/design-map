@@ -52,7 +52,8 @@
 }
 
 .filter__list {
-    overflow: auto;
+    overflow-x: height;
+    overflow-y: auto;
     transition: .3s ease;
 }
 
@@ -70,7 +71,8 @@
 
     .filter__list {
         max-height: 0;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .filter__list_open {
