@@ -51,7 +51,7 @@
 
 @media screen and (max-width: 768px) {
     .footerlinks {
-        margin-bottom: 4vw;
+        margin-bottom: 3.5vw;
     }
 }
 
@@ -93,7 +93,7 @@
     }
 
     .footerlogo__image {
-        width: 12vw;
+        width: 15vw;
         margin-right: 0;
     }
 
