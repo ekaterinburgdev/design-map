@@ -4,6 +4,8 @@ input[type='checkbox'] {
     appearance: none;
     background-image: url(../public/checked_false.svg);
     background-size: contain;
+    cursor: pointer;
+    transition: all .15s ease;
 }
 
 input[type='checkbox']:checked {

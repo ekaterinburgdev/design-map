@@ -8,17 +8,17 @@
     height: 48px;
     border-radius: 100px;
     position: absolute;
-    top: 4px;
+    top: 3px;
     right: 4px;
     z-index: 1;
-    transition: all .3s ease-out;
+    transition: all .15s ease-out;
     line-height: 1;
     cursor: pointer;
-    color: gray;
+    color: rgba(255,255,255,.5);
 }
 
 .close:hover {
-    background-color: rgba(255,255,255,.1);
-    backdrop-filter: blur(10px);
-    opacity: 0.8;
+    color: rgba(255,255,255,1);
+    background-color: #000;
+    transform: scale(1.3);
 }
