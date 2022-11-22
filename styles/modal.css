@@ -18,8 +18,9 @@
   .react-modal-sheet-container {
     width: 400px !important;
     height: calc(90vh - 2vw)  !important;
-    left: 8px !important;
-    top: 12px !important;
+    right: .5vw !important;
+    left: initial !important;
+    top: .5vw !important;
   }
 
   .react-modal-sheet-header,
