@@ -19,7 +19,7 @@
     width: 400px !important;
     height: calc(90vh - 2vw)  !important;
     right: .5vw !important;
-    left: initial !important;
+    left: auto !important;
     top: .5vw !important;
   }
 

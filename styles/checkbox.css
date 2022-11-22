@@ -8,10 +8,6 @@ input[type='checkbox'] {
     transition: all .15s ease;
 }
 
-/* input[type='checkbox']:hover {
-    transform: scale(1.2);
-} */
-
 input[type='checkbox']:checked {
     background-image: url(../public/checked_true.svg);
 }

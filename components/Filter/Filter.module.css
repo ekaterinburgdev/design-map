@@ -52,8 +52,8 @@
 }
 
 .filter__list {
-    /* overflow: visible; */
-    transition: all .3s ease;
+    overflow: auto;
+    transition: .3s ease;
 }
 
 @media screen and (max-width: 768px) {
@@ -69,7 +69,7 @@
     }
 
     .filter__list {
-        max-height: 0px;
+        max-height: 0;
         overflow: auto;
     }
 
