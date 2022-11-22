@@ -75,13 +75,14 @@
     font-family: inherit;
     color: #ffd400;
     cursor: pointer;
-    transition: .3s;
+    transition: all .15s ease;
     background-color: #302808;
 }
 
 .popup__share_copied,
 .popup__share:hover {
     color: white;
+    background-color: rgba(255,212,0,.5);
 }
 
 .popup__share_copied {
