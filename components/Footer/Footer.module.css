@@ -42,7 +42,7 @@
     bottom: 0;
     right: 0;
     z-index: 100;
-    margin: 0 .5vw 1.5vw;
+    margin: 0 .5vw 0.75vw;
     padding: .5vw .5vw .5vw .25vw;
     transition: all .15s ease;
     background-color: #000;
