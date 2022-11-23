@@ -17,12 +17,19 @@ interface Props {
     preview: string | null;
     isOpen: boolean;
     openPopup: IMapContext['openPopup'];
+    closePopup: IMapContext['closePopup'];
 }
 
 function Placemark({
-    id, type, x, y, name, preview, isOpen, openPopup,
+    id, type, x, y, name, preview, isOpen, openPopup, closePopup,
 }: Props) {
-    const onClick = () => openPopup(id);
+    const onClick = () => {
+        if (isOpen) {
+            closePopup();
+        } else {
+            openPopup(id);
+        }
+    };
     const size = isOpen ? 64 : 40;
     const html = useMemo(() => {
         const style = `

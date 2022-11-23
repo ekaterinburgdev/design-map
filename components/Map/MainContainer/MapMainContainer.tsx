@@ -30,7 +30,7 @@ interface Props {
 function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
     const position: [number, number] = COORDS_EKATERINBURG;
     const {
-        placemarks, popup, selectedMarksTypes, savePlacemarks, openPopup,
+        placemarks, popup, selectedMarksTypes, savePlacemarks, openPopup, closePopup,
     } = useContext(MapContext);
 
     useEffect(() => {
@@ -78,6 +78,7 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
                         preview={placemark?.preview?.s?.src || null}
                         isOpen={placemark.isOpen}
                         openPopup={openPopup}
+                        closePopup={closePopup}
                     />
                 ))}
             </MapContainer>
