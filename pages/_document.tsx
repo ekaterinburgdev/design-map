@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-title-in-document-head */
 import React from 'react';
 import {
-    Html,
-    Head,
-    Main,
-    NextScript,
+    Html, Head, Main, NextScript,
 } from 'next/document';
 
 export default function Document() {
@@ -40,18 +37,18 @@ export default function Document() {
 
                 <link rel="dns-prefetch" href="https://mc.yandex.ru/" />
                 <link rel="dns-prefetch" href="https://tile.osmand.net/" />
-                <meta name="yandex-verification" content="94c725a9e4228358" />
-                <meta name="facebook-domain-verification" content="l85smr2ck81ubuv1qof1bylyds521p" />
+                {/* <meta name="yandex-verification" content="94c725a9e4228358" />
+<meta name="facebook-domain-verification" content="l85smr2ck81ubuv1qof1bylyds521p" /> */}
             </Head>
             <body>
                 <Main />
                 <NextScript />
-                <div
+                {/* <div
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{
                         __html: '<script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");ym(57112834, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });</script><noscript><div><img src="https://mc.yandex.ru/watch/57112834" style="position:absolute; left:-9999px;" alt="" /></div></noscript>',
                     }}
-                />
+                /> */}
             </body>
         </Html>
     );

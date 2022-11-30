@@ -55,12 +55,6 @@ https://map.ekaterinburg.design/api/map
 
 ## Development
 
-1. Add `.env.local` with Notion keys
-```sh
-NOTION_TOKEN=
-NOTION_DATABASE=
-```
-
 2. Install [Node.js](https://nodejs.org/en/download/) and [pnpm](https://www.npmjs.com/package/pnpm#user-content-install)
 
 3. Install dependencies

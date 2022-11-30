@@ -37,7 +37,7 @@ function Placemark({
 
         if (preview) {
             return `<img
-                src="${preview}"
+                src="https://map.ekaterinburg.design${preview}"
                 class="${className}"
                 style="${style}"
                 alt="${name}"
