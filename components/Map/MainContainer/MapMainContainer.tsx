@@ -66,7 +66,7 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
                 zoom={DEFAULT_ZOOM}
                 className={styles.Map}
             >
-                <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
+                <TileLayer url="https://map-tile-server-nibach.vercel.app/api/load-tile?z={z}&x={x}&y={y}" />
                 {selectedMarks.map((placemark) => (
                     <Marker
                         key={placemark.id}
