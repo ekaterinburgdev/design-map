@@ -1,0 +1,13 @@
+{
+    "headers": [
+        {
+            "source": "/api/map",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                }
+            ]
+        }
+    ]
+}
