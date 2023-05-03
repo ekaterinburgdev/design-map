@@ -9,9 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "preload-static": "node ./build-scripts/prepare-static/index.js",
     "lint": "next lint",
-    "postinstall": "pnpm preload-static",
     "devPreinstall": "husky install"
   },
   "dependencies": {
