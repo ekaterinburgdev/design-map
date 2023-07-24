@@ -19,6 +19,30 @@ export async function optimize(items) {
 }
 
 export async function resize(items) {
+    const resizeAndRoundOne = (filename, maxSize, prefix) =>
+        sharp(IMAGES_URLS_PATH + filename)
+            .composite([
+                {
+                    input: Buffer.from(
+                        `<svg>
+                            <circle
+                                cx="${maxSize / 2}"
+                                cy="${maxSize / 2}"
+                                r="${maxSize / 2}"
+                            />
+                        </svg>`,
+                    ),
+                    blend: 'dest-in',
+                },
+            ])
+            .resize({
+                fit: sharp.fit.cover,
+                width: maxSize,
+                height: maxSize,
+            })
+            .toFile(IMAGES_URLS_PATH + prefix + '_' + filename)
+            .then(({ width, height }) => ({ width, height }));
+
     const resizeOne = (filename, maxSize, prefix) =>
         sharp(IMAGES_URLS_PATH + filename)
             .resize({
@@ -31,7 +55,7 @@ export async function resize(items) {
     return Promise.all(
         items.map(async ({ id, path }) => {
             const m = await resizeOne(path, 800, 'm');
-            const s = await resizeOne(path, 80, 's');
+            const s = await resizeAndRoundOne(path, 80, 's');
             return { id, m, s, path };
         }),
     );
