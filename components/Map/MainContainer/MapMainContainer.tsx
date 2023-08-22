@@ -21,6 +21,8 @@ import 'leaflet/dist/leaflet.css';
 
 const DEFAULT_ZOOM = checkIsMobile() ? 12 : 15;
 
+const tileServer = `https://tiles.ekaterinburg.io/styles/basic-black/{z}/{x}/{y}${window.devicePixelRatio === 2 ? '@2x' : ''}.png`;
+
 interface Props {
     placemarksData: MapItem[];
     // eslint-disable-next-line react/require-default-props
@@ -66,7 +68,7 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
                 zoom={DEFAULT_ZOOM}
                 className={styles.Map}
             >
-                <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
+                <TileLayer url={tileServer} />
                 {selectedMarks.map((placemark) => (
                     <Marker
                         key={placemark.id}
