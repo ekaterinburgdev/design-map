@@ -21,7 +21,7 @@ import 'leaflet/dist/leaflet.css';
 
 const DEFAULT_ZOOM = checkIsMobile() ? 12 : 15;
 
-const tileServer = `https://tiles.ekaterinburg.io/styles/basic-black/{z}/{x}/{y}${window.devicePixelRatio > 1 ? '@2x' : ''}.png`;
+const tileServer = `https://tiles.ekaterinburg.city/styles/basic-black/{z}/{x}/{y}${window.devicePixelRatio > 1 ? '@2x' : ''}.png`;
 
 interface Props {
     placemarksData: MapItem[];
