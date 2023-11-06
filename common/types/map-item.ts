@@ -13,6 +13,7 @@ export enum MapItemType {
     'Памятные таблички',
     'Транспорт',
     'Настенные таблички',
+    'Столбы со стрелками',
 }
 
 export type MapItemImageSize = {
