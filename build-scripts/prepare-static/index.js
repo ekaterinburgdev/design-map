@@ -78,7 +78,11 @@ async function removeOriginalImages(items) {
         items.map(
             (item) =>
                 new Promise((resolve) => {
-                    fs.unlinkSync(IMAGES_URLS_PATH + item.path);
+                    try {
+                        fs.unlinkSync(IMAGES_URLS_PATH + item.path);
+                    } catch (e) {
+                        console.log(`Error remove ${e}`);
+                    }
                     resolve();
                 }),
         ),
