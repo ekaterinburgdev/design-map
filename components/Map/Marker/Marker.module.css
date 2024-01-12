@@ -9,6 +9,7 @@
     transition: all .15s;
     background-color: black;
     position: relative;
+    font-size: 0;
 }
 
 .marker:hover {
