@@ -51,9 +51,9 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
 
     const selectedMarks: (MapItem & { isOpen: boolean })[] = useMemo(
         () => placemarks
-            .filter((mark) => selectedMarksTypes.includes(mark.type))
-            .map((m) => ({ ...m, isOpen: m.id === popup?.id })),
-        [placemarks, selectedMarksTypes, popup?.id],
+            .filter((mark) => selectedMarksTypes.includes(mark.properties.type))
+            .map((m) => ({ ...m, isOpen: m.properties.id === popup?.properties.id })),
+        [placemarks, selectedMarksTypes, popup?.properties.id],
     );
 
     return (
@@ -71,13 +71,13 @@ function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
                 <TileLayer url={tileServer} />
                 {selectedMarks.map((placemark) => (
                     <Marker
-                        key={placemark.id}
-                        id={placemark.id}
-                        type={placemark.type}
-                        name={placemark.name}
-                        x={placemark.coords[0]}
-                        y={placemark.coords[1]}
-                        preview={placemark?.preview?.s?.src || null}
+                        key={placemark.properties.id}
+                        id={placemark.properties.id}
+                        type={placemark.properties.type}
+                        name={placemark.properties.name}
+                        x={placemark.geometry.coordinates[0]}
+                        y={placemark.geometry.coordinates[1]}
+                        preview={placemark?.properties.images[0].s.src || null}
                         isOpen={placemark.isOpen}
                         openPopup={openPopup}
                         closePopup={closePopup}

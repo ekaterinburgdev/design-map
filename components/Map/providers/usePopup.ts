@@ -1,9 +1,9 @@
 import {
     useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { MapItem } from 'common/types/map-item';
+import { MapItem, MapItemProperties } from 'common/types/map-item';
 
-type PopupId = MapItem['id'];
+type PopupId = MapItemProperties['id'];
 
 export function usePopup(placemarks: MapItem[]) {
     const [popupId, setOpenedPopup] = useState<PopupId>(null);
@@ -16,7 +16,10 @@ export function usePopup(placemarks: MapItem[]) {
         window.location.hash = '';
     }, []);
 
-    const popup = useMemo(() => placemarks.find((p) => p.id === popupId), [placemarks, popupId]);
+    const popup = useMemo(
+        () => placemarks.find((p) => p.properties.id === popupId),
+        [placemarks, popupId],
+    );
 
     useEffect(() => {
         function onHashChange() {
@@ -31,7 +34,7 @@ export function usePopup(placemarks: MapItem[]) {
     }, [setOpenedPopup]);
 
     useEffect(() => {
-        document.title = popup?.name || 'Карта дизайн-кода Екатеринбурга';
+        document.title = popup?.properties.name || 'Карта дизайн-кода Екатеринбурга';
     }, [popup]);
 
     useEffect(() => {

@@ -8,11 +8,11 @@ export function Popup() {
     const { popup, closePopup } = useContext(MapContext);
 
     const size = useMemo(() => {
-        const mobileSize = popup?.images?.length ? 0.85 : 0.50;
+        const mobileSize = popup?.properties?.images?.length ? 0.85 : 0.50;
         const desktopSize = 100;
 
         return checkIsMobile() ? mobileSize : desktopSize;
-    }, [popup?.images?.length]);
+    }, [popup?.properties?.images?.length]);
 
     return (
         <Modal size={size} isOpen={!!popup} close={closePopup}>

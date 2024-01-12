@@ -19,7 +19,7 @@ export function Filter({ showHeading = true }: Props) {
     const { placemarks, allMarksTypes, selectedMarksTypes } = useContext(MapContext);
 
     const itemsByType = useMemo(
-        () => groupBy<MapItem>(placemarks, (mark) => mark.type),
+        () => groupBy<MapItem>(placemarks, (mark) => mark.properties.type),
         [placemarks],
     );
 

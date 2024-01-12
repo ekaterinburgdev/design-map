@@ -25,9 +25,9 @@ async function init() {
         .then(log('Optimize images'))
         .then(optimize)
         .catch(console.log);
-    
+
     console.log('Save metadata');
-    await saveMetadata(items, images);
+    await saveGeojson(items, images);
 
     console.log(`Finish in ${(Date.now() - start) / 1000} seconds`);
 }
@@ -84,38 +84,46 @@ async function removeOriginalImages(items) {
     return items;
 }
 
-function saveMetadata(items, images) {
+function saveGeojson(items, images) {
     const imagesById = images.reduce((all, item) => {
         all[item.id] = item;
         return all;
     }, {});
 
-    const updatedItems = items.map((item) => ({
-        ...item,
-        images: item.images
-            .map((url) => {
-                const guid = getNotionGUID(url);
-                const image = imagesById[guid];
+    const geojson =
+    {
+        type: 'FeatureCollection',
+        name: 'design-code',
+        features: items.map((item) => {
+            return {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: item.coords
+                },
+                properties: {
+                    id: item.id,
+                    name: item.name,
+                    type: item.type,
+                    description: item.description,
+                    street: item.street,
+                    images: item.images.map((url) => {
+                        const guid = getNotionGUID(url);
+                        const image = imagesById[guid];
 
-                if (image) {
-                    return {
-                        m: {
-                            ...image.m,
-                            src: `${IMAGES_PATH_EXTERNAL}/m_${image.path}`,
-                        },
-                        s: {
-                            ...image.s,
-                            src: `${IMAGES_PATH_EXTERNAL}/s_${image.path}`,
-                        },
-                    };
-                }
-                return null;
-            })
-            .filter((src) => src !== null) || []
-    })).map((mark) => ({
-        ...mark,
-        preview: mark.images?.[0] || null
-    }))
+                        if (!image) {
+                            return null;
+                        }
 
-    fs.writeFileSync(PLACEMARKS_PATH, JSON.stringify(updatedItems));
+                        return {
+                            m: { ...image.m, src: `${IMAGES_PATH_EXTERNAL}/m_${image.path}` },
+                            s: { ...image.s, src: `${IMAGES_PATH_EXTERNAL}/s_${image.path}` },
+                        };
+                    }).filter((img) => img !== null) || []
+                },
+            }
+        })
+    }
+
+    fs.writeFileSync(PLACEMARKS_PATH, JSON.stringify(geojson));
 }

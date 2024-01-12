@@ -6,7 +6,7 @@ import placemarks from 'public/placemarks.geojson';
 export default function Widget() {
     return (
         <MapContextProvider>
-            <Map placemarksData={placemarks} showFilterHeading={false} />
+            <Map placemarksData={placemarks.features} showFilterHeading={false} />
         </MapContextProvider>
     );
 }

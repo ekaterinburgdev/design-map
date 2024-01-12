@@ -2,10 +2,10 @@ import React, {
     ReactNode, useCallback, useMemo, useState,
 } from 'react';
 import { uniqBy } from 'lodash';
-import { MapItem, MapItemType } from 'common/types/map-item';
+import { MapItem, MapItemProperties, MapItemType } from 'common/types/map-item';
 import { usePopup } from './usePopup';
 
-type PopupId = MapItem['id'];
+type PopupId = MapItemProperties['id'];
 export interface IMapContext {
     placemarks: MapItem[];
     savePlacemarks: (marks: MapItem[]) => void;
@@ -32,7 +32,9 @@ interface Props {
     children: ReactNode;
 }
 
-const getUniqTypes = (all: MapItem[]) => uniqBy(all, (mark) => mark.type).map((m) => m.type);
+const getUniqTypes = (all: MapItem[]) => (
+    uniqBy(all, (mark) => mark.type).map((m) => m.properties.type)
+);
 
 export function MapContextProvider({ children }: Props) {
     const [placemarks, setMarks] = useState<MapItem[]>([]);

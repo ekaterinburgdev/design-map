@@ -1,13 +1,15 @@
 import React from 'react';
-import { MapItem } from 'common/types/map-item';
+import { MapItemProperties } from 'common/types/map-item';
 import { MARKER_FILTER_COLOR } from 'common/constants/colors';
 import styles from './Info.module.css';
 
 interface Props {
-    placemark: MapItem
+    type: MapItemProperties['type']
+    name: MapItemProperties['name']
+    description: MapItemProperties['description']
 }
 
-export function Info({ placemark: { type, name, description } }: Props) {
+export function Info({ type, name, description }: Props) {
     const text = name !== description ? description : null;
     const color = MARKER_FILTER_COLOR[type];
 

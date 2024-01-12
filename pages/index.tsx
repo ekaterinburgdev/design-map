@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <>
             <MapContextProvider>
-                <Map placemarksData={placemarks} />
+                <Map placemarksData={placemarks.features} />
             </MapContextProvider>
 
             <Footer />

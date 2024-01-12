@@ -1,5 +1,31 @@
 import type { LatLngExpression } from 'leaflet';
 
+export interface MapItemCollection {
+    type: string;
+    name: string;
+    features: MapItem[];
+}
+
+export interface MapItem {
+    type: string;
+    geometry: MapItemGeometry;
+    properties: MapItemProperties;
+}
+
+export interface MapItemGeometry {
+    type: 'Point';
+    coordinates: LatLngExpression;
+}
+
+export interface MapItemProperties {
+    id: string;
+    name: string;
+    type: MapItemType;
+    description: string;
+    street: string;
+    images: MapItemImage[];
+}
+
 export enum MapItemType {
     'Логотипы и айдентика',
     'Навигационные стелы',
@@ -16,25 +42,13 @@ export enum MapItemType {
     'Столбы со стрелками',
 }
 
-export type MapItem = {
-    id: string;
-    name: string;
-    type: MapItemType;
-    coords: LatLngExpression;
-    street: string;
-    date?: number;
-    description: string;
-    images: MapItemImage[];
-    preview: MapItemImage;
-};
-
-export type MapItemImage = {
+export interface MapItemImage {
     m: MapItemImageSize;
     s: MapItemImageSize;
-};
+}
 
-export type MapItemImageSize = {
+export interface MapItemImageSize {
     width: number;
     height: number;
     src: string;
-};
+}

@@ -18,9 +18,9 @@ export function PopupContent({ placemark }: Props) {
             <div className={styles.popup__content}>
                 <div className={styles.popup__header}>
                     <div className={classNames(styles.popup__headeritem, styles.popup__coords)}>
-                        {placemark.coords[0]?.toFixed(6)}
+                        {placemark.geometry.coordinates[0]?.toFixed(6)}
                         {', '}
-                        {placemark.coords[1]?.toFixed(6)}
+                        {placemark.geometry.coordinates[1]?.toFixed(6)}
                     </div>
                     <button
                         type="button"
@@ -35,16 +35,22 @@ export function PopupContent({ placemark }: Props) {
                         {isCopied ? 'Скопировано' : 'Скопировать ссылку на объект'}
                     </button>
                 </div>
-                <h2 className={styles.popup__title}>{placemark.name}</h2>
-                {placemark.street && (
-                    <address className={styles.popup__address}>{placemark.street}</address>
+                <h2 className={styles.popup__title}>{placemark.properties.name}</h2>
+                {placemark.properties.street && (
+                    <address className={styles.popup__address}>
+                        {placemark.properties.street}
+                    </address>
                 )}
                 <div className={styles.popup__info}>
-                    <Info placemark={placemark} />
+                    <Info
+                        type={placemark.properties.type}
+                        name={placemark.properties.name}
+                        description={placemark.properties.description}
+                    />
                 </div>
             </div>
             <div className={styles.popup__images}>
-                {placemark.images.map((src) => (
+                {placemark.properties.images.map((src) => (
                     <a href={src.m.src} target="_blank" rel="noreferrer">
                         <Image
                             key={src.m.src}
@@ -52,7 +58,7 @@ export function PopupContent({ placemark }: Props) {
                             width={src.m.width}
                             height={src.m.height}
                             className={styles.popup__image}
-                            alt={placemark.name}
+                            alt={placemark.properties.name}
                         />
                     </a>
                 ))}
