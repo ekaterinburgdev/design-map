@@ -99,7 +99,6 @@ function saveMetadata(items, images) {
 
                 if (image) {
                     return {
-                        id: image.id,
                         m: {
                             ...image.m,
                             src: `${IMAGES_PATH_EXTERNAL}/m_${image.path}`,
