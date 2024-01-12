@@ -16,18 +16,6 @@ export enum MapItemType {
     'Столбы со стрелками',
 }
 
-export type MapItemImageSize = {
-    width: number;
-    height: number;
-    src: string;
-};
-
-export type MapItemImage = {
-    id: string;
-    m: MapItemImageSize;
-    s: MapItemImageSize;
-};
-
 export type MapItem = {
     id: string;
     name: string;
@@ -38,4 +26,15 @@ export type MapItem = {
     description: string;
     images: MapItemImage[];
     preview: MapItemImage;
+};
+
+export type MapItemImage = {
+    m: MapItemImageSize;
+    s: MapItemImageSize;
+};
+
+export type MapItemImageSize = {
+    width: number;
+    height: number;
+    src: string;
 };

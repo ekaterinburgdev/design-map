@@ -47,7 +47,7 @@ export function PopupContent({ placemark }: Props) {
                 {placemark.images.map((src) => (
                     <a href={src.m.src} target="_blank" rel="noreferrer">
                         <Image
-                            key={src.id}
+                            key={src.m.src}
                             src={src.m.src}
                             width={src.m.width}
                             height={src.m.height}

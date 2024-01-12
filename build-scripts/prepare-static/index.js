@@ -3,20 +3,16 @@ import fs from 'node:fs';
 import { log, getNotionGUID } from './utils.js';
 import { resize, optimize } from './prepareImages.js';
 import { getPlacemarksData, getImagesUrls } from './getNotionData.js';
-import {
-    VERCEL_PUBLIC_IMAGES_PATH,
-    IMAGES_URLS_PATH,
-    PLACEMARKS_CACHE_PATH
-} from './constants.js';
+import { IMAGES_PATH, IMAGES_PATH_EXTERNAL, PLACEMARKS_PATH } from './constants.js';
 
 const start = Date.now()
 
 async function init() {
-    console.log('Prepare images')
+    console.log('Prepare images');
 
-    await clearCachedImages(IMAGES_URLS_PATH);
+    await clearCachedImages(IMAGES_PATH);
 
-    console.log('Get list from Notion')
+    console.log('Get list from Notion');
     const items = await getPlacemarksData();
     const imageUrls = getImagesUrls(items);
 
@@ -30,10 +26,10 @@ async function init() {
         .then(optimize)
         .catch(console.log);
     
-    console.log('Save metadata')
-    await saveMetadata(PLACEMARKS_CACHE_PATH, items, images)
+    console.log('Save metadata');
+    await saveMetadata(items, images);
 
-    console.log(`Finish in ${(Date.now() - start) / 1000} seconds`)
+    console.log(`Finish in ${(Date.now() - start) / 1000} seconds`);
 }
 init()
 
@@ -51,7 +47,7 @@ async function downloadImages(urls) {
             const ext = new URL(url).pathname.split('.').at(-1);
             const guid = getNotionGUID(url);
             const filename = `${guid}.${ext}`;
-            const file = fs.createWriteStream(IMAGES_URLS_PATH + filename);
+            const file = fs.createWriteStream(IMAGES_PATH + filename);
 
             https.get(url, (response) => {
                 response.pipe(file);
@@ -77,7 +73,7 @@ async function removeOriginalImages(items) {
             (item) =>
                 new Promise((resolve) => {
                     try {
-                        fs.unlinkSync(IMAGES_URLS_PATH + item.path);
+                        fs.unlinkSync(IMAGES_PATH + item.path);
                     } catch (e) {
                         console.log(`Error remove ${e}`);
                     }
@@ -88,7 +84,7 @@ async function removeOriginalImages(items) {
     return items;
 }
 
-function saveMetadata(cachPath, items, images) {
+function saveMetadata(items, images) {
     const imagesById = images.reduce((all, item) => {
         all[item.id] = item;
         return all;
@@ -106,11 +102,11 @@ function saveMetadata(cachPath, items, images) {
                         id: image.id,
                         m: {
                             ...image.m,
-                            src: `${VERCEL_PUBLIC_IMAGES_PATH}m_${image.path}`,
+                            src: `${IMAGES_PATH_EXTERNAL}/m_${image.path}`,
                         },
                         s: {
                             ...image.s,
-                            src: `${VERCEL_PUBLIC_IMAGES_PATH}s_${image.path}`,
+                            src: `${IMAGES_PATH_EXTERNAL}/s_${image.path}`,
                         },
                     };
                 }
@@ -122,5 +118,5 @@ function saveMetadata(cachPath, items, images) {
         preview: mark.images?.[0] || null
     }))
 
-    fs.writeFileSync(cachPath, JSON.stringify(updatedItems));
+    fs.writeFileSync(PLACEMARKS_PATH, JSON.stringify(updatedItems));
 }

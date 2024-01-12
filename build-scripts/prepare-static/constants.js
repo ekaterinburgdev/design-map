@@ -1,9 +1,9 @@
-export const VERCEL_PUBLIC_PATH = '/notion-static/';
+const PUBLIC = 'public';
+const IMAGES = 'images';
+const PLACEMARKS = 'placemarks.geojson';
 
-export const VERCEL_OUTPUT_PATH = `./public${VERCEL_PUBLIC_PATH}`;
+export const IMAGES_PATH = `./${PUBLIC}/${IMAGES}/`;
+export const IMAGES_PATH_EXTERNAL = `/${IMAGES}`;
 
-export const VERCEL_PUBLIC_IMAGES_PATH = `${VERCEL_PUBLIC_PATH}images/`;
-
-export const IMAGES_URLS_PATH = `${VERCEL_OUTPUT_PATH}images/`;
-
-export const PLACEMARKS_CACHE_PATH = `${VERCEL_OUTPUT_PATH}placemarks.json`;
+export const PLACEMARKS_PATH = `./${PUBLIC}/${PLACEMARKS}`;
+export const PLACEMARKS_PATH_EXTERNAL = `/${PLACEMARKS}`;
