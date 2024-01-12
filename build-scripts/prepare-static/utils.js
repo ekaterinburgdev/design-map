@@ -5,5 +5,6 @@ export function log(message = '', getMessage = () => '') {
     };
 }
 
-export const getNotionGUID = (url) =>
-    url.includes('notion-static.com') ? url.match(/secure.notion-static.com\/(.*)\//)[1] : '';
+export function getNotionGUID(notionFileUrl) {
+    return new URL(notionFileUrl).pathname.split('/').at(-2);
+}

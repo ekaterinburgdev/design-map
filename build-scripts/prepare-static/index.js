@@ -48,12 +48,10 @@ async function clearCachedImages(path) {
 async function downloadImages(urls) {
     const downloadImage = (url) =>
         new Promise((resolve, reject) => {
-            const [filename] = new URL(url).pathname.split('/').slice(-1);
-            const ext = filename.split('.').slice(-1)[0];
-            const notionGUID = getNotionGUID(url);
-            const outputFilename = notionGUID ? `${notionGUID}.${ext}` : filename;
-
-            const file = fs.createWriteStream(IMAGES_URLS_PATH + outputFilename);
+            const ext = new URL(url).pathname.split('.').at(-1);
+            const guid = getNotionGUID(url);
+            const filename = `${guid}.${ext}`;
+            const file = fs.createWriteStream(IMAGES_URLS_PATH + filename);
 
             https.get(url, (response) => {
                 response.pipe(file);
@@ -61,11 +59,11 @@ async function downloadImages(urls) {
 
             file.on('finish', () => {
                 file.close();
-                resolve({ id: notionGUID, path: outputFilename });
+                resolve({ id: guid, path: filename });
             });
 
             file.on('error', (e) => {
-                console.error(`Not loaded: ${outputFilename}`, e);
+                console.error(`Not loaded: ${filename}`, e);
                 reject();
             });
         });
@@ -100,10 +98,8 @@ function saveMetadata(cachPath, items, images) {
         ...item,
         images: item.images
             .map((url) => {
-                const notionGUID = url.includes('notion-static.com')
-                    ? url.match(/secure.notion-static.com\/(.*)\//)[1]
-                    : '';
-                const image = imagesById[notionGUID];
+                const guid = getNotionGUID(url);
+                const image = imagesById[guid];
 
                 if (image) {
                     return {
