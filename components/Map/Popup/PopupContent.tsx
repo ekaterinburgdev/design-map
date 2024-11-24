@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useCopyHref } from 'components/helpers/useCopyHref';
+import { useCopyUrl } from 'components/helpers/useCopyUrl';
 import { MapItem } from 'common/types/map-item';
 import styles from './Popup.module.css';
 import { Info } from './components/Info';
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function PopupContent({ placemark }: Props) {
-    const { isCopied, onCopy } = useCopyHref(window.location.href);
+    const { isCopied, onCopy } = useCopyUrl(window.location.href);
 
     return (
         <div className={styles.popup}>
