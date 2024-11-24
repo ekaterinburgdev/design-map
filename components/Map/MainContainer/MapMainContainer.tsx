@@ -30,7 +30,11 @@ interface Props {
 }
 
 function MapMainContainer({ placemarksData, showFilterHeading = true }: Props) {
-    const position: [number, number] = COORDS_EKATERINBURG;
+    const objectId = window.location.hash.slice(1);
+    const matchedObject = objectId && placemarksData.find((p) => p.id === objectId);
+    const position: [number, number] = matchedObject
+        ? [matchedObject.coords[0], matchedObject.coords[1]] : COORDS_EKATERINBURG;
+
     const {
         placemarks, popup, selectedMarksTypes, savePlacemarks, openPopup, closePopup,
     } = useContext(MapContext);
