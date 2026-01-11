@@ -36,7 +36,8 @@ export default function Document() {
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
                 <link rel="manifest" href="/site.webmanifest" />
 
-                <link rel="dns-prefetch" href="https://tiles.ekaterinburg.city/" />
+                <link rel="dns-prefetch" href="https://mc.yandex.ru/" />
+                <link rel="dns-prefetch" href="https://tile.osmand.net/" />
                 <meta name="yandex-verification" content="94c725a9e4228358" />
                 <meta name="facebook-domain-verification" content="l85smr2ck81ubuv1qof1bylyds521p" />
             </Head>
