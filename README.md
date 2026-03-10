@@ -18,7 +18,7 @@ You can embed widget in your own site via `<iframe>`
 You can use the site API in your own applications.
 
 ```
-https://map.ekaterinburg.design/api/map
+https://map.ekaterinburg.design/notion-static/placemarks.json
 ```
 
 ### Response example
